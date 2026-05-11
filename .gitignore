@@ -24,7 +24,6 @@ pnpm-debug.log*
 # Local Netlify folder
 .netlify
 
-# Astro
+# Ohters
 .astro/
-
 .vercel
