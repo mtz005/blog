@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES_SITE: https://mtz005.github.io/blog
-          BASE_PATH: /blog
+          BASE_PATH: /blog/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
