@@ -3,6 +3,7 @@ import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import Background from "../components/Background.astro";
 import "../styles/global.css";
+import logoStrokeRaw from "../../public/logo-stroke.svg?raw";
 
 export interface Props {
   title: string;
@@ -39,7 +40,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
       id="page-transition"
       class="pointer-events-none fixed inset-0 z-40 flex items-center justify-center bg-white opacity-0 transition-opacity duration-300 dark:bg-zinc-900"
     >
-      <div class="transition-spinner"></div>
+      <Fragment set:html={logoStrokeRaw} />
     </div>
 
     <!-- Background component with dot pattern and ambient glow -->
@@ -72,6 +73,12 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
           try {
             // Show transition overlay
             if (pageTransition) {
+              // Restart logo draw animation
+              pageTransition.querySelectorAll("[data-animate]").forEach((el) => {
+                (el as HTMLElement).style.animation = "none";
+                el.getBoundingClientRect(); // force reflow
+                (el as HTMLElement).style.animation = "";
+              });
               pageTransition.classList.remove("opacity-0", "pointer-events-none");
               pageTransition.classList.add("opacity-100");
             }
@@ -280,32 +287,116 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
   </body>
 </html>
 
+<style is:global>
+  /* Logo draw-in animation — global so it applies to set:html and markdown embeds */
+  /* Order: m-right → i (stem + dot) → m-left */
+  .logo-anim [data-animate="m-right"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-path 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0s forwards;
+  }
+
+  .logo-anim [data-animate="i-stem"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-path 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  }
+
+  .logo-anim [data-animate="i-dot"] {
+    opacity: 0;
+    animation: dot-appear 0.2s ease 0.65s forwards;
+  }
+
+  .logo-anim [data-animate="m-left"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-path 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.75s forwards;
+  }
+
+  @keyframes draw-path {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes dot-appear {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Infinite loop variant.
+     Draw-in  order: m-right → i-stem → i-dot → m-left
+     Draw-out order: m-left  → i-dot  → i-stem → m-right  (reversed)
+     Each element owns its full timeline in a dedicated keyframe so
+     entry and exit delays are independent. Total cycle: 3.5s.
+     Absolute timings (3.5s base):
+       draw-in  finish by ~1.2s  |  hold ~1.2–1.95s  |  draw-out done by ~3s  |  pause ~3–3.5s */
+  .logo-anim-loop [data-animate="m-right"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-loop-m-right 3.5s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite;
+  }
+
+  .logo-anim-loop [data-animate="i-stem"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-loop-i-stem 3.5s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite;
+  }
+
+  .logo-anim-loop [data-animate="i-dot"] {
+    opacity: 0;
+    animation: dot-loop 3.5s ease 0s infinite;
+  }
+
+  .logo-anim-loop [data-animate="m-left"] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-loop-m-left 3.5s cubic-bezier(0.4, 0, 0.2, 1) 0s infinite;
+  }
+
+  /* m-right: in 0→0.45s (0-13%), out 2.56→3.0s (73-86%) */
+  @keyframes draw-loop-m-right {
+    0%   { stroke-dashoffset: 1; }
+    13%  { stroke-dashoffset: 0; }
+    73%  { stroke-dashoffset: 0; }
+    86%  { stroke-dashoffset: 1; }
+    100% { stroke-dashoffset: 1; }
+  }
+
+  /* i-stem: in 0.39→0.70s (11-20%), out 2.38→2.66s (68-76%) */
+  @keyframes draw-loop-i-stem {
+    0%, 11% { stroke-dashoffset: 1; }
+    20%     { stroke-dashoffset: 0; }
+    68%     { stroke-dashoffset: 0; }
+    76%     { stroke-dashoffset: 1; }
+    100%    { stroke-dashoffset: 1; }
+  }
+
+  /* m-left: in 0.75→1.2s (21-34%), out 1.96→2.38s (56-68%) */
+  @keyframes draw-loop-m-left {
+    0%, 21% { stroke-dashoffset: 1; }
+    34%     { stroke-dashoffset: 0; }
+    56%     { stroke-dashoffset: 0; }
+    68%     { stroke-dashoffset: 1; }
+    100%    { stroke-dashoffset: 1; }
+  }
+
+  /* i-dot: appear 0.63→0.84s (18-24%), disappear 2.24→2.45s (64-70%) */
+  @keyframes dot-loop {
+    0%, 18% { opacity: 0; }
+    24%     { opacity: 1; }
+    64%     { opacity: 1; }
+    70%     { opacity: 0; }
+    100%    { opacity: 0; }
+  }
+</style>
+
 <style>
   /* Enhanced page transition effects */
   #page-transition {
     transition: opacity 0.3s ease;
     backdrop-filter: blur(4px);
-  }
-
-  /* Transition spinner animation */
-  .transition-spinner {
-    width: 30px;
-    height: 30px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #3b82f6;
-    animation: spin 0.7s linear infinite;
-  }
-
-  :global(.dark) .transition-spinner {
-    border-color: rgba(255, 255, 255, 0.1);
-    border-top-color: #60a5fa;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
   }
 
   /* Content entrance animation */

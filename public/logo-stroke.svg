@@ -1,0 +1,11 @@
+<svg class="logo-anim" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="logo-stroke-mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="7" width="56" height="43">
+<rect width="55.812" height="41.1258" transform="matrix(1 0 0 -1 4.11429 49.0373)" fill="white"/>
+</mask>
+<g mask="url(#logo-stroke-mask)">
+<path data-animate="m-left" opacity="0.5" d="M10.13 46.7332V20.6165H13.6742L24.2113 47.1361" stroke="currentColor" stroke-width="6" stroke-linecap="square" pathLength="1"/>
+<path data-animate="m-right" d="M39.9305 46.7332V20.6165H36.3863L24.2811 50.9753" stroke="currentColor" stroke-width="6" stroke-linecap="square" pathLength="1"/>
+<path data-animate="i-stem" d="M53.8621 30.771L53.8621 49.1625" stroke="currentColor" stroke-width="6" pathLength="1"/>
+<circle data-animate="i-dot" cx="53.8269" cy="23.4375" r="2.82109" fill="currentColor"/>
+</g>
+</svg>
