@@ -1,7 +1,10 @@
-/* Remove all the complex mobile menu styles and keep only what's necessary */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Replaces darkMode: 'class' from tailwind.config.cjs */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Replaces plugins: [require('@tailwindcss/typography')] */
+@plugin "@tailwindcss/typography";
 
 @layer base {
   :root {
@@ -9,6 +12,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     --theme-transition: 0.3s ease;
+
+    /* Typography plugin theme overrides (replaces theme.extend.typography) */
+    --tw-prose-links: var(--color-zinc-900);
+    --tw-prose-headings: var(--color-zinc-900);
+    --tw-prose-code: var(--color-zinc-900);
+    --tw-prose-invert-links: var(--color-zinc-100);
+    --tw-prose-invert-headings: var(--color-zinc-100);
+    --tw-prose-invert-code: var(--color-zinc-100);
   }
 
   html {
@@ -28,6 +39,27 @@
     transition: background-color var(--theme-transition), 
                 color var(--theme-transition), 
                 border-color var(--theme-transition);
+  }
+
+  /* Typography prose overrides */
+  .prose a {
+    text-decoration-color: var(--color-zinc-400);
+    text-underline-offset: 2px;
+  }
+
+  .prose code {
+    background-color: var(--color-zinc-100);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-1) var(--spacing-1-5);
+  }
+
+  .dark .prose code {
+    background-color: var(--color-zinc-800);
+  }
+
+  .prose code::before,
+  .prose code::after {
+    content: "";
   }
 }
 

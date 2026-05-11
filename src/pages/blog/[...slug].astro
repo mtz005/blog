@@ -219,6 +219,8 @@ const finalReadingTime = entry.data.readingTime || readingTimeValue;
 </script>
 
 <style>
+  @reference "../../styles/global.css";
+
   /* Removing TOC-related styles */
   
   /* Language badge styling */
@@ -277,11 +279,11 @@ const finalReadingTime = entry.data.readingTime || readingTimeValue;
   }
   
   .prose pre {
-    @apply bg-[#1e293b] dark:bg-[#1e293b] text-zinc-200 p-3 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm my-4 sm:my-6 shadow-md !important;
+    @apply !bg-[#1e293b] !text-zinc-200 !p-3 sm:!p-4 !rounded-lg !overflow-x-auto !text-xs sm:!text-sm !my-4 sm:!my-6 !shadow-md;
   }
   
   .prose pre code {
-    @apply bg-transparent p-0 text-zinc-200 dark:text-zinc-200 !important;
+    @apply !bg-transparent !p-0 !text-zinc-200 dark:!text-zinc-200;
   }
   
   

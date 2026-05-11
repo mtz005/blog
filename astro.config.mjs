@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react'; // Add this line
+import tailwindcss from '@tailwindcss/vite';
+import react from '@astrojs/react';
 
 // Determine site URL based on environment
 const getSiteURL = () => {
@@ -20,11 +20,10 @@ const getSiteURL = () => {
 export default defineConfig({
   site: getSiteURL(),
   integrations: [
-    tailwind(),
     react(),
   ],
   vite: {
-    // Đảm bảo biến môi trường được chuyển đến client
+    plugins: [tailwindcss()],
     define: {
       'import.meta.env.SPOTIFY_CLIENT_ID': JSON.stringify(process.env.SPOTIFY_CLIENT_ID),
       'import.meta.env.SPOTIFY_CLIENT_SECRET': JSON.stringify(process.env.SPOTIFY_CLIENT_SECRET),
