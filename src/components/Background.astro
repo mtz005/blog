@@ -4,7 +4,7 @@
 
 <div class="fixed inset-0 -z-10 overflow-hidden theme-transition-all">
   <!-- Dot pattern background with smooth transition -->
-  <div class="absolute inset-0 bg-grid-pattern bg-[center_top_-1px] [mask-image:radial-gradient(white,transparent_85%)] theme-transition-bg"></div>
+  <div class="absolute inset-0 bg-[center_top_-1px] [mask-image:radial-gradient(white,transparent_85%)] theme-transition-bg"></div>
   
   <!-- Ambient glow effects with enhanced transitions -->
   <div class="absolute left-1/4 top-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-zinc-400/20 dark:bg-zinc-500/20 rounded-full blur-3xl opacity-50 animate-glow theme-transition-bg"></div>
@@ -44,17 +44,6 @@
 </script>
 
 <style>
-  /* Grid pattern for dots with improved transitions */
-  .bg-grid-pattern {
-    background-size: 24px 24px;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
-    transition: background-image 0.7s cubic-bezier(0.65, 0, 0.35, 1);
-  }
-  
-  /* Dark mode version with smooth transition */
-  :global(.dark) .bg-grid-pattern {
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  }
   
   /* Ambient glow animations with improved transitions */
   .animate-glow {

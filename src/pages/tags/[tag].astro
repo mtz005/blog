@@ -107,7 +107,7 @@ const relatedTags = [...new Set(
     
     <!-- Posts list với màu zinc -->
     <div class="relative">
-      <div class="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-10 pointer-events-none"></div>
+      <div class="absolute inset-0 opacity-5 dark:opacity-10 pointer-events-none"></div>
       
       <div class="relative space-y-6 sm:space-y-8">
         {sortedPosts.map((post) => (
@@ -230,15 +230,6 @@ const relatedTags = [...new Set(
 </BaseLayout>
 
 <style>
-  /* Grid pattern background */
-  .bg-grid-pattern {
-    background-size: 30px 30px;
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-  }
-  
-  :global(.dark) .bg-grid-pattern {
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  }
   
   /* Hide scrollbar but keep functionality */
   .hide-scrollbar {
