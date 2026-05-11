@@ -60,14 +60,6 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
         const pageTransition = document.getElementById("page-transition");
         const mainContent = document.querySelector("main");
 
-        // Initialize content with entrance animation
-        if (mainContent) {
-          mainContent.classList.add("content-entering");
-          setTimeout(() => {
-            mainContent.classList.remove("content-entering");
-          }, 800);
-        }
-
         // Function to load content via fetch
         async function loadContent(url) {
           try {
@@ -240,20 +232,6 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
           }
         });
 
-        // Check RSS feed availability
-        const checkAndGenerateRSS = async () => {
-          try {
-            const response = await fetch("/rss.xml");
-            if (!response.ok) {
-              console.warn("RSS feed not found. Please generate it using an RSS plugin for Astro.");
-            }
-          } catch (error) {
-            console.warn("Could not check RSS feed status.");
-          }
-        };
-
-        // Check RSS feed availability
-        checkAndGenerateRSS();
       });
 
       // Theme handling with transition effects
@@ -396,7 +374,6 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
   /* Enhanced page transition effects */
   #page-transition {
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(4px);
   }
 
   /* Content entrance animation */
