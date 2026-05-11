@@ -34,6 +34,7 @@ const socialLinks = [
 
 <footer
   class="theme-transition-all relative mt-20 overflow-hidden border-t border-zinc-100 dark:border-zinc-800"
+  style="content-visibility: auto; contain-intrinsic-size: auto 400px;"
 >
   <!-- Enhanced decorative elements with animation -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -776,5 +777,16 @@ const socialLinks = [
 
   #spotify-now-playing:hover::before {
     opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pulse,
+    .animate-float-slow,
+    .pulse-dot::after,
+    .progress-glow,
+    .spinner,
+    .marquee-active .marquee-wrapper {
+      animation: none;
+    }
   }
 </style>
