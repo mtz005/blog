@@ -42,6 +42,7 @@ console.log(`Sorted posts length: ${sortedPosts.length}`);
 
 // Generate a consistent but random-looking hue for the tag
 const tagHue = Math.abs(tag.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) % 360);
+const base = import.meta.env.BASE_URL;
 
 // Generate related tags (tags that appear together with the current tag)
 const relatedTags = [
@@ -64,7 +65,7 @@ const relatedTags = [
 
       <div class="relative text-center sm:text-left">
         <a
-          href="/tags"
+          href={`${base}tags`}
           class="group mb-4 inline-flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
         >
           <svg
@@ -145,7 +146,7 @@ const relatedTags = [
           <div class="flex flex-nowrap justify-center gap-2 sm:justify-start">
             {relatedTags.map((relatedTag) => (
               <a
-                href={`/tags/${relatedTag}`}
+                  href={`${base}tags/${relatedTag}`}
                 class="inline-flex flex-shrink-0 items-center rounded-full bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
               >
                 #{relatedTag}
@@ -229,7 +230,7 @@ const relatedTags = [
                   </div>
 
                   <h2 class="mb-2 text-center text-xl font-semibold text-zinc-900 transition-colors group-hover:text-zinc-700 sm:mb-3 sm:text-left sm:text-2xl dark:text-zinc-100 dark:group-hover:text-zinc-300">
-                    <a href={`/blog/${post.slug}/`} class="before:absolute before:inset-0">
+                    <a href={`${base}${post.slug}`} class="before:absolute before:inset-0">
                       {post.data.title}
                     </a>
                   </h2>
@@ -245,7 +246,7 @@ const relatedTags = [
                   <div class="mb-3 flex flex-wrap justify-center gap-2 sm:mb-0 sm:justify-start">
                     {post.data.tags.slice(0, 3).map((postTag) => (
                       <a
-                        href={`/tags/${postTag}`}
+                        href={`${base}tags/${postTag}`}
                         class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors ${
                           postTag === tag
                             ? "bg-zinc-900/10 text-zinc-900 dark:bg-zinc-100/20 dark:text-zinc-100"
@@ -265,7 +266,7 @@ const relatedTags = [
 
                 <div class="mx-auto sm:mr-0 sm:ml-auto">
                   <a
-                    href={`/blog/${post.slug}/`}
+                    href={`${base}${post.slug}`}
                     class="inline-flex items-center text-sm font-medium text-zinc-700 transition-colors group-hover:text-zinc-900 dark:text-zinc-300 dark:group-hover:text-zinc-100"
                     aria-hidden="true"
                     tabindex="-1"
@@ -326,7 +327,7 @@ const relatedTags = [
           </h2>
           <p class="text-zinc-600 dark:text-zinc-400">There are no posts with this tag yet.</p>
           <a
-            href="/blog"
+            href={`${base}blog`}
             class="mt-6 inline-flex items-center gap-2 rounded-md bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-800 transition-all duration-300 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
           >
             <svg

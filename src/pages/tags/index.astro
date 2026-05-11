@@ -21,6 +21,7 @@ const tagObjects = tags.map((tag) => {
 
 // Sắp xếp tag theo số lượng bài viết (nhiều nhất lên đầu)
 const sortedTags = [...tagObjects].sort((a, b) => b.count - a.count);
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Explore Tags">
@@ -109,7 +110,7 @@ const sortedTags = [...tagObjects].sort((a, b) => b.count - a.count);
             <div class="xxxs:grid-cols-2 xxs:grid-cols-2 xs:grid-cols-3 xxxs:gap-2 xxs:gap-2 xs:gap-2 grid w-full grid-cols-2 gap-1.5 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
               {sortedTags.map((tag) => (
                 <a
-                  href={`/tags/${tag.name}`}
+                  href={`${base}tags/${tag.name}`}
                   class="group theme-transition-element theme-ripple relative min-w-0 flex-grow overflow-hidden rounded-md border border-zinc-200 transition-all duration-300 hover:scale-[1.03] hover:border-zinc-300 hover:shadow-md active:scale-95 sm:rounded-lg sm:hover:shadow-lg md:rounded-xl dark:border-zinc-800 dark:hover:border-zinc-700"
                   style={`--tag-hue: ${tag.hue};`}
                 >

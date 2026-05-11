@@ -1,12 +1,13 @@
 ---
 const currentYear = new Date().getFullYear();
+const base = import.meta.env.BASE_URL;
 
 // Define navigation links
 const navLinks = [
-  { text: "About", href: "/about" },
-  { text: "Blog", href: "/blog" },
-  { text: "Tags", href: "/tags" },
-  { text: "RSS", href: "/rss.xml" },
+  { text: "About", href: `${base}about` },
+  { text: "Blog", href: `${base}blog` },
+  { text: "Tags", href: `${base}tags` },
+  { text: "RSS", href: `${base}rss.xml` },
 ];
 
 // Define social links
@@ -59,7 +60,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
       <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
         <!-- Brand section - enhanced with better spacing -->
         <div class="col-span-1 md:col-span-3">
-          <a href="/" class="group inline-block">
+          <a href={base} class="group inline-block">
             <div class="flex items-center">
               <div
                 class="relative flex h-10 w-10 transform items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-zinc-800 to-zinc-600 shadow-lg transition-transform group-hover:scale-105 dark:from-zinc-200 dark:to-zinc-400"
