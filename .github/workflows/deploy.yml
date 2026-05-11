@@ -34,8 +34,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          GITHUB_PAGES_SITE: https://mtz005.github.io/blog
-          BASE_PATH: /blog/
+          GITHUB_PAGES_SITE: https://mirkea.com/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -23,7 +23,7 @@ const getSiteURL = () => {
 // https://astro.build/config
 export default defineConfig({
 	site: getSiteURL(),
-	base: process.env.BASE_PATH || "/",
+	base: "/",
 	integrations: [react()],
 	vite: {
 		plugins: [tailwindcss()],
