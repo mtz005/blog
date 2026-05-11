@@ -1,6 +1,7 @@
 ---
 const currentYear = new Date().getFullYear();
 const base = import.meta.env.BASE_URL;
+const spotifyWorkerUrl = import.meta.env.PUBLIC_SPOTIFY_WORKER_URL || "";
 
 // Define navigation links
 const navLinks = [
@@ -29,10 +30,6 @@ const socialLinks = [
   },
 ];
 
-// Spotify credentials from environment variables
-const SPOTIFY_CLIENT_ID = import.meta.env.SPOTIFY_CLIENT_ID;
-const SPOTIFY_CLIENT_SECRET = import.meta.env.SPOTIFY_CLIENT_SECRET;
-const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
 ---
 
 <footer
@@ -272,19 +269,10 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
   </div>
 </footer>
 
-<script>
-  // Spotify API integration
-  const SPOTIFY_CLIENT_ID = "5bf615754c0540fb91eb8e0bdd559530";
-  const SPOTIFY_CLIENT_SECRET = "0d4ff8da113d4f919708f89b4d932add";
-  const REFRESH_TOKEN =
-    "AQBcbskr8ow1vRkKHvUA-vQeyqt2TVrCR3iMD9XWn-lHS4oWZ2OqQe9FdNzqWB5l64UteQc4VP9E4Gsb3O45vp5wAF6iZS6zTb04Y4EZmRPUWwjw28H9oZ_FkdXYN7wn79Q";
-
+<script define:vars={{ spotifyWorkerUrl }}>
   // Cache for current track
   let currentTrackId = null;
-  // Change the type declaration to allow for Timer/number
-  let progressInterval: ReturnType<typeof setInterval> | null = null;
-  let accessToken = null;
-  let lastUpdateTime = 0;
+  let progressInterval = null;
   let currentProgress = 0;
   let trackDuration = 0;
 
@@ -296,55 +284,19 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   }
 
-  // Function to get access token
-  async function getAccessToken() {
+  // Function to get currently playing track from Cloudflare Worker
+  async function getCurrentlyPlaying() {
+    if (!spotifyWorkerUrl) return null;
     try {
-      // Check if we already have a valid token
-      if (accessToken && Date.now() - lastUpdateTime < 3500000) {
-        // Token is valid for 1 hour, refresh after 58 minutes
-        return accessToken;
-      }
-
-      const response = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: "Basic " + btoa(SPOTIFY_CLIENT_ID + ":" + SPOTIFY_CLIENT_SECRET),
-        },
-        body: new URLSearchParams({
-          grant_type: "refresh_token",
-          refresh_token: REFRESH_TOKEN,
-        }),
-      });
-
-      const data = await response.json();
-      accessToken = data.access_token;
-      lastUpdateTime = Date.now();
-      return accessToken;
-    } catch (error) {
-      console.error("Error getting access token:", error);
-      return null;
-    }
-  }
-
-  // Function to get currently playing track
-  async function getCurrentlyPlaying(token) {
-    try {
-      const response = await fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-
-      if (response.status === 204) {
-        return null; // No track playing
-      }
+      const response = await fetch(spotifyWorkerUrl);
 
       if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+        throw new Error(`API error: ${response.status}`);
       }
 
-      return await response.json();
+      const data = await response.json();
+      if (!data.isPlaying) return null;
+      return data;
     } catch (error) {
       console.error("Error fetching currently playing:", error);
       return null;
@@ -452,8 +404,8 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
   function updateNowPlayingUI(data) {
     const trackNameEl = document.getElementById("track-name");
     const trackArtistEl = document.getElementById("track-artist");
-    const trackImageEl = document.getElementById("track-image") as HTMLImageElement; // Type assertion
-    const spotifyLinkEl = document.getElementById("spotify-link") as HTMLAnchorElement; // Type assertion
+    const trackImageEl = document.getElementById("track-image");
+    const spotifyLinkEl = document.getElementById("spotify-link");
     const progressBarEl = document.getElementById("progress-bar");
     const currentTimeEl = document.getElementById("current-time");
     const totalTimeEl = document.getElementById("total-time");
@@ -548,10 +500,7 @@ const REFRESH_TOKEN = import.meta.env.SPOTIFY_REFRESH_TOKEN;
   // Main function to fetch and update
   async function updateSpotifyNowPlaying() {
     try {
-      const token = await getAccessToken();
-      if (!token) return;
-
-      const currentlyPlaying = await getCurrentlyPlaying(token);
+      const currentlyPlaying = await getCurrentlyPlaying();
       updateNowPlayingUI(currentlyPlaying);
     } catch (error) {
       console.error("Error updating Spotify now playing:", error);

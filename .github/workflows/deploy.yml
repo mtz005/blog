@@ -35,6 +35,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES_SITE: https://mirkea.com/
+          PUBLIC_SPOTIFY_WORKER_URL: ${{ secrets.PUBLIC_SPOTIFY_WORKER_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
