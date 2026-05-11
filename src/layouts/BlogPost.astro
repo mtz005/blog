@@ -122,6 +122,72 @@ if (heroImage) {
   </article>
 
   <slot name="after-article" />
+
+  <div class="mx-auto mt-16 border-t border-zinc-200 pt-10 dark:border-zinc-800">
+    <h2 class="mb-6 text-lg font-semibold text-zinc-900 dark:text-zinc-100">Comments</h2>
+    <div
+      id="cusdis_thread"
+      data-host="https://cusdis.com"
+      data-app-id="e48f5d58-50c3-46ff-a952-7547a70bf8ca"
+      data-page-id={Astro.url.pathname}
+      data-page-url={canonicalURL.toString()}
+      data-page-title={title}
+      data-theme="auto"
+      style="min-height: 300px"
+    >
+    </div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+    <script>
+      function watchCusdisHeight() {
+        const thread = document.getElementById("cusdis_thread");
+        if (!thread) return;
+
+        const attach = (iframe) => {
+          // srcdoc iframes are same-origin — we can observe their body directly
+          const tryObserve = () => {
+            try {
+              const body = iframe.contentDocument?.body;
+              if (!body) {
+                setTimeout(tryObserve, 100);
+                return;
+              }
+              new ResizeObserver(() => {
+                const h = iframe.contentDocument.body.scrollHeight;
+                if (h > 0) iframe.style.height = h + "px";
+              }).observe(body);
+            } catch {
+              setTimeout(tryObserve, 200);
+            }
+          };
+          iframe.addEventListener("load", tryObserve);
+          tryObserve();
+        };
+
+        // Cusdis creates the iframe asynchronously — watch for it
+        const mo = new MutationObserver((mutations) => {
+          for (const m of mutations) {
+            for (const node of m.addedNodes) {
+              if (node.tagName === "IFRAME") {
+                attach(node);
+                mo.disconnect();
+              }
+            }
+          }
+        });
+        mo.observe(thread, { childList: true });
+
+        // In case iframe is already there
+        const existing = thread.querySelector("iframe");
+        if (existing) {
+          attach(existing);
+          mo.disconnect();
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", watchCusdisHeight);
+      document.addEventListener("astro:page-load", watchCusdisHeight);
+    </script>
+  </div>
 </Layout>
 
 <script>
