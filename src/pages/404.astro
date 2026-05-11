@@ -1,56 +1,102 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="404 - Page Not Found">
-  <div class="relative flex flex-col items-center justify-center min-h-[80vh] py-20 text-center px-4 overflow-hidden">
+  <div
+    class="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-4 py-20 text-center"
+  >
     <!-- Animated background elements -->
     <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute -top-20 -left-20 w-64 h-64 bg-zinc-100 dark:bg-zinc-800/50 rounded-full blur-3xl opacity-50 animate-blob"></div>
-      <div class="absolute top-1/2 right-1/4 w-96 h-96 bg-zinc-200 dark:bg-zinc-800/30 rounded-full blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-      <div class="absolute bottom-20 left-1/3 w-72 h-72 bg-zinc-100 dark:bg-zinc-800/40 rounded-full blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
-    </div>
-    
-    <!-- Main content with animation -->
-    <div class="relative z-10 max-w-xl mx-auto">
-      <div class="glitch-wrapper">
-        <h1 class="glitch text-9xl sm:text-[12rem] font-bold text-zinc-900 dark:text-zinc-100 leading-none" data-text="404">404</h1>
+      <div
+        class="animate-blob absolute -top-20 -left-20 h-64 w-64 rounded-full bg-zinc-100 opacity-50 blur-3xl dark:bg-zinc-800/50"
+      >
       </div>
-      
-      <h2 class="mt-6 text-2xl sm:text-3xl font-bold text-zinc-800 dark:text-zinc-200">Page Not Found</h2>
-      
-      <p class="mt-6 text-zinc-600 dark:text-zinc-400 max-w-md mx-auto text-lg">
+      <div
+        class="animate-blob animation-delay-2000 absolute top-1/2 right-1/4 h-96 w-96 rounded-full bg-zinc-200 opacity-30 blur-3xl dark:bg-zinc-800/30"
+      >
+      </div>
+      <div
+        class="animate-blob animation-delay-4000 absolute bottom-20 left-1/3 h-72 w-72 rounded-full bg-zinc-100 opacity-40 blur-3xl dark:bg-zinc-800/40"
+      >
+      </div>
+    </div>
+
+    <!-- Main content with animation -->
+    <div class="relative z-10 mx-auto max-w-xl">
+      <div class="glitch-wrapper">
+        <h1
+          class="glitch text-9xl leading-none font-bold text-zinc-900 sm:text-[12rem] dark:text-zinc-100"
+          data-text="404"
+        >
+          404
+        </h1>
+      </div>
+
+      <h2 class="mt-6 text-2xl font-bold text-zinc-800 sm:text-3xl dark:text-zinc-200">
+        Page Not Found
+      </h2>
+
+      <p class="mx-auto mt-6 max-w-md text-lg text-zinc-600 dark:text-zinc-400">
         The page you're looking for has vanished into the digital void.
       </p>
-      
-      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a
           href="/"
-          class="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-zinc-900 text-zinc-100 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 transition-all duration-300 overflow-hidden shadow-lg hover:shadow-xl"
+          class="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-zinc-900 px-6 py-3 text-zinc-100 shadow-lg transition-all duration-300 hover:bg-zinc-800 hover:shadow-xl dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
         >
-          <span class="absolute inset-0 bg-gradient-to-r from-zinc-700 to-zinc-900 dark:from-zinc-300 dark:to-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 relative z-10">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          <span
+            class="absolute inset-0 z-0 bg-gradient-to-r from-zinc-700 to-zinc-900 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-zinc-300 dark:to-zinc-100"
+          ></span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="relative z-10 h-5 w-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            ></path>
           </svg>
-          <span class="font-medium relative z-10">Return Home</span>
+          <span class="relative z-10 font-medium">Return Home</span>
         </a>
-        
-        <button 
+
+        <button
           id="back-button"
-          class="group inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm hover:shadow-md"
+          class="group inline-flex items-center gap-2 rounded-lg border border-zinc-300 px-6 py-3 text-zinc-700 shadow-sm transition-all duration-300 hover:bg-zinc-100 hover:shadow-md dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 transition-transform duration-300 group-hover:-translate-x-1">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="h-5 w-5 transition-transform duration-300 group-hover:-translate-x-1"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
           </svg>
           <span class="font-medium">Go Back</span>
         </button>
       </div>
-      
+
       <!-- Random fun fact -->
-      <div class="mt-16 p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl shadow-sm max-w-md mx-auto backdrop-blur-sm border border-zinc-100 dark:border-zinc-700/50">
-        <h3 class="text-sm font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Did you know?</h3>
-        <p class="mt-2 text-zinc-700 dark:text-zinc-300 text-sm" id="fun-fact">
-          The 404 error code originated when CERN's web server displayed room 404 (their server room) as the error message when a file wasn't found.
+      <div
+        class="mx-auto mt-16 max-w-md rounded-xl border border-zinc-100 bg-zinc-50 p-6 shadow-sm backdrop-blur-sm dark:border-zinc-700/50 dark:bg-zinc-800/50"
+      >
+        <h3 class="text-sm font-medium tracking-wider text-zinc-500 uppercase dark:text-zinc-400">
+          Did you know?
+        </h3>
+        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300" id="fun-fact">
+          The 404 error code originated when CERN's web server displayed room 404 (their server
+          room) as the error message when a file wasn't found.
         </p>
       </div>
     </div>
@@ -59,10 +105,10 @@ import Layout from '../layouts/Layout.astro';
 
 <script>
   // Go back functionality
-  document.getElementById('back-button')?.addEventListener('click', () => {
+  document.getElementById("back-button")?.addEventListener("click", () => {
     window.history.back();
   });
-  
+
   // Array of fun 404 facts
   const funFacts = [
     "The 404 error code originated when CERN's web server displayed room 404 (their server room) as the error message when a file wasn't found.",
@@ -72,45 +118,47 @@ import Layout from '../layouts/Layout.astro';
     "Many companies use creative 404 pages as a way to showcase their brand personality and humor.",
     "The HTTP 1.0 specification from 1996 officially defined the 404 error as 'Not Found'.",
     "Studies show that well-designed 404 pages can reduce bounce rates by up to 30%.",
-    "The most common cause of 404 errors is mistyped URLs."
+    "The most common cause of 404 errors is mistyped URLs.",
   ];
-  
+
   // Display a random fun fact
-  const funFactElement = document.getElementById('fun-fact');
+  const funFactElement = document.getElementById("fun-fact");
   if (funFactElement) {
     const randomFact = funFacts[Math.floor(Math.random() * funFacts.length)];
     funFactElement.textContent = randomFact;
   }
-  
+
   // Handle SPA transitions for 404 page
   function setupSPATransitions() {
     // Handle all internal links for SPA transitions
-    document.querySelectorAll('a[href^="/"]').forEach(link => {
+    document.querySelectorAll('a[href^="/"]').forEach((link) => {
       // Skip links that are anchor links, external links, or already processed
-      if (link.getAttribute('href').includes('#') || 
-          link.getAttribute('target') === '_blank' || 
-          link.hasAttribute('data-spa-handled')) {
+      if (
+        link.getAttribute("href").includes("#") ||
+        link.getAttribute("target") === "_blank" ||
+        link.hasAttribute("data-spa-handled")
+      ) {
         return;
       }
-      
+
       // Mark as handled to avoid duplicate listeners
-      link.setAttribute('data-spa-handled', 'true');
-      
-      link.addEventListener('click', (e) => {
+      link.setAttribute("data-spa-handled", "true");
+
+      link.addEventListener("click", (e) => {
         // Don't handle if modifier keys are pressed (for opening in new tab, etc.)
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) {
           return;
         }
-        
+
         e.preventDefault();
-        const targetHref = link.getAttribute('href');
-        
+        const targetHref = link.getAttribute("href");
+
         // Trigger page transition animation
-        const pageTransition = document.getElementById('page-transition');
+        const pageTransition = document.getElementById("page-transition");
         if (pageTransition) {
-          pageTransition.classList.remove('opacity-0');
-          pageTransition.classList.add('opacity-100');
-          
+          pageTransition.classList.remove("opacity-0");
+          pageTransition.classList.add("opacity-100");
+
           // Navigate after transition effect
           setTimeout(() => {
             window.location.href = targetHref;
@@ -121,24 +169,24 @@ import Layout from '../layouts/Layout.astro';
         }
       });
     });
-    
+
     // Re-initialize back button after SPA navigation
-    const backButton = document.getElementById('back-button');
+    const backButton = document.getElementById("back-button");
     if (backButton) {
-      backButton.addEventListener('click', () => {
+      backButton.addEventListener("click", () => {
         window.history.back();
       });
     }
   }
-  
+
   // Initialize on first load
-  document.addEventListener('DOMContentLoaded', setupSPATransitions);
-  
+  document.addEventListener("DOMContentLoaded", setupSPATransitions);
+
   // Re-initialize when content changes via Astro's view transitions
-  document.addEventListener('astro:page-load', setupSPATransitions);
-  
+  document.addEventListener("astro:page-load", setupSPATransitions);
+
   // For compatibility with custom transition system
-  document.addEventListener('page-transition-complete', setupSPATransitions);
+  document.addEventListener("page-transition-complete", setupSPATransitions);
 </script>
 
 <style>
@@ -157,31 +205,31 @@ import Layout from '../layouts/Layout.astro';
       transform: translate(0px, 0px) scale(1);
     }
   }
-  
+
   .animate-blob {
     animation: blob 7s infinite;
   }
-  
+
   .animation-delay-2000 {
     animation-delay: 2s;
   }
-  
+
   .animation-delay-4000 {
     animation-delay: 4s;
   }
-  
+
   /* Glitch effect for 404 text */
   .glitch-wrapper {
     position: relative;
     display: inline-block;
   }
-  
+
   .glitch {
     position: relative;
     display: inline-block;
     animation: glitch-skew 1s infinite linear alternate-reverse;
   }
-  
+
   .glitch::before,
   .glitch::after {
     content: attr(data-text);
@@ -191,20 +239,22 @@ import Layout from '../layouts/Layout.astro';
     width: 100%;
     height: 100%;
   }
-  
+
   .glitch::before {
     left: 2px;
     text-shadow: -2px 0 #ff00c1;
     clip: rect(44px, 450px, 56px, 0);
     animation: glitch-anim 5s infinite linear alternate-reverse;
   }
-  
+
   .glitch::after {
     left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+    text-shadow:
+      -2px 0 #00fff9,
+      2px 2px #ff00c1;
     animation: glitch-anim2 1s infinite linear alternate-reverse;
   }
-  
+
   @keyframes glitch-anim {
     0% {
       clip: rect(31px, 9999px, 94px, 0);
@@ -291,7 +341,7 @@ import Layout from '../layouts/Layout.astro';
       transform: skew(0.6deg);
     }
   }
-  
+
   @keyframes glitch-anim2 {
     0% {
       clip: rect(65px, 9999px, 65px, 0);
@@ -378,7 +428,7 @@ import Layout from '../layouts/Layout.astro';
       transform: skew(0.74deg);
     }
   }
-  
+
   @keyframes glitch-skew {
     0% {
       transform: skew(-1deg);

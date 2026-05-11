@@ -42,11 +42,11 @@ Images often account for most of the downloaded bytes on a webpage. Optimizing t
 - Compress images without sacrificing quality
 
 ```html
-<img 
-  src="small.jpg" 
-  srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w" 
-  sizes="(max-width: 600px) 500px, (max-width: 1200px) 1000px, 1500px" 
-  alt="Description" 
-  loading="lazy" 
+<img
+  src="small.jpg"
+  srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 1500w"
+  sizes="(max-width: 600px) 500px, (max-width: 1200px) 1000px, 1500px"
+  alt="Description"
+  loading="lazy"
 />
 ```

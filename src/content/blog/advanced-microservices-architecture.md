@@ -20,19 +20,19 @@ Modern distributed systems require sophisticated architectural patterns to handl
 ```typescript
 // Custom Service Mesh Controller
 interface MeshController {
-  readonly kind: 'ServiceMeshController';
+  readonly kind: "ServiceMeshController";
   spec: {
     ingress: IngressConfig;
     security: SecurityPolicy;
     observability: ObservabilityConfig;
     trafficManagement: TrafficPolicy;
-  }
+  };
 }
 
 // Advanced Traffic Management
 interface TrafficPolicy {
   loadBalancing: {
-    algorithm: 'ROUND_ROBIN' | 'LEAST_CONN' | 'RANDOM' | 'CONSISTENT_HASH';
+    algorithm: "ROUND_ROBIN" | "LEAST_CONN" | "RANDOM" | "CONSISTENT_HASH";
     consistentHash?: {
       httpHeaderName?: string;
       httpCookie?: {
@@ -60,54 +60,54 @@ interface TrafficPolicy {
 
 // Implementation Example
 const meshConfig: MeshController = {
-  kind: 'ServiceMeshController',
+  kind: "ServiceMeshController",
   spec: {
     ingress: {
       gateway: {
-        hosts: ['api.example.com'],
+        hosts: ["api.example.com"],
         tls: {
-          mode: 'MUTUAL',
-          serverCertificate: '/etc/certs/server.pem',
-          privateKey: '/etc/certs/key.pem',
-          caCertificates: '/etc/certs/ca.pem'
-        }
-      }
+          mode: "MUTUAL",
+          serverCertificate: "/etc/certs/server.pem",
+          privateKey: "/etc/certs/key.pem",
+          caCertificates: "/etc/certs/ca.pem",
+        },
+      },
     },
     security: {
       authorization: {
-        mode: 'CUSTOM',
-        providers: ['jwt', 'oauth2'],
+        mode: "CUSTOM",
+        providers: ["jwt", "oauth2"],
         policies: [
           {
-            targets: [{ service: 'payment-service' }],
-            requirements: ['authentication', 'rate-limiting']
-          }
-        ]
+            targets: [{ service: "payment-service" }],
+            requirements: ["authentication", "rate-limiting"],
+          },
+        ],
       },
       mtls: {
-        mode: 'STRICT'
-      }
+        mode: "STRICT",
+      },
     },
     observability: {
       tracing: {
         sampling: 100,
         zipkin: {
-          address: 'zipkin.monitoring:9411'
-        }
+          address: "zipkin.monitoring:9411",
+        },
       },
       metrics: {
         prometheus: {
-          scrapeInterval: '15s',
-          port: 9090
-        }
-      }
+          scrapeInterval: "15s",
+          port: 9090,
+        },
+      },
     },
     trafficManagement: {
       loadBalancing: {
-        algorithm: 'CONSISTENT_HASH',
+        algorithm: "CONSISTENT_HASH",
         consistentHash: {
-          httpHeaderName: 'x-user-id'
-        }
+          httpHeaderName: "x-user-id",
+        },
       },
       circuitBreaker: {
         maxConnections: 1000,
@@ -115,17 +115,17 @@ const meshConfig: MeshController = {
         maxRequests: 1000,
         maxRetries: 3,
         consecutiveErrors: 5,
-        interval: '10s',
-        baseEjectionTime: '30s'
+        interval: "10s",
+        baseEjectionTime: "30s",
       },
       outlierDetection: {
         consecutiveErrors: 5,
-        interval: '10s',
-        baseEjectionTime: '30s',
-        maxEjectionPercent: 10
-      }
-    }
-  }
+        interval: "10s",
+        baseEjectionTime: "30s",
+        maxEjectionPercent: 10,
+      },
+    },
+  },
 };
 ```
 
@@ -160,12 +160,10 @@ class EventStore {
 
   async append<T>(event: DomainEvent<T>): Promise<void> {
     const events = this.events.get(event.aggregateId) || [];
-    
+
     // Optimistic concurrency check
     if (events.length !== event.version - 1) {
-      throw new ConcurrencyError(
-        `Expected version ${events.length + 1}, got ${event.version}`
-      );
+      throw new ConcurrencyError(`Expected version ${events.length + 1}, got ${event.version}`);
     }
 
     events.push(event);
@@ -179,7 +177,7 @@ class EventStore {
       const state = this.reconstructState(event.aggregateId);
       this.snapshots.set(event.aggregateId, {
         version: event.version,
-        state
+        state,
       });
     }
   }
@@ -187,12 +185,12 @@ class EventStore {
   private async notify<T>(event: DomainEvent<T>): Promise<void> {
     const handlers = this.eventHandlers.get(event.type) || [];
     await Promise.all(
-      handlers.map(handler => 
-        handler.handle(event).catch(error => {
+      handlers.map((handler) =>
+        handler.handle(event).catch((error) => {
           console.error(`Error handling event ${event.eventId}:`, error);
           // Implement retry logic or dead letter queue
-        })
-      )
+        }),
+      ),
     );
   }
 
@@ -203,10 +201,7 @@ class EventStore {
 
   private reconstructState(aggregateId: string): any {
     const snapshot = this.snapshots.get(aggregateId);
-    const events = this.getEvents(
-      aggregateId,
-      snapshot ? snapshot.version + 1 : 1
-    );
+    const events = this.getEvents(aggregateId, snapshot ? snapshot.version + 1 : 1);
 
     let state = snapshot ? snapshot.state : this.createInitialState();
     for (const event of events) {
@@ -244,7 +239,7 @@ class CommandBus {
       (next, middleware) => async (cmd: Command<any>) => {
         await middleware.handle(cmd, next);
       },
-      async (cmd: Command<any>) => await handler.handle(cmd)
+      async (cmd: Command<any>) => await handler.handle(cmd),
     );
 
     await chain(command);
@@ -264,7 +259,7 @@ interface CreateOrderCommand {
 class CreateOrderHandler implements CommandHandler<CreateOrderCommand> {
   constructor(
     private readonly eventStore: EventStore,
-    private readonly orderRepository: OrderRepository
+    private readonly orderRepository: OrderRepository,
   ) {}
 
   async handle(command: Command<CreateOrderCommand>): Promise<void> {
@@ -278,19 +273,19 @@ class CreateOrderHandler implements CommandHandler<CreateOrderCommand> {
         aggregateId: command.payload.orderId,
         version: 1,
         timestamp: new Date(),
-        type: 'OrderCreated',
+        type: "OrderCreated",
         data: {
           orderId: command.payload.orderId,
           userId: command.payload.userId,
-          items: command.payload.items
+          items: command.payload.items,
         },
         metadata: {
           correlationId: command.metadata.correlationId,
           causationId: command.metadata.correlationId,
           userId: command.metadata.userId,
-          tags: ['order', 'creation']
-        }
-      }
+          tags: ["order", "creation"],
+        },
+      },
     ];
 
     // Append events
@@ -310,7 +305,7 @@ interface ServiceInstance {
   id: string;
   name: string;
   version: string;
-  status: 'UP' | 'DOWN' | 'STARTING' | 'OUT_OF_SERVICE';
+  status: "UP" | "DOWN" | "STARTING" | "OUT_OF_SERVICE";
   metadata: {
     zone: string;
     environment: string;
@@ -323,7 +318,7 @@ interface ServiceInstance {
   };
   health: {
     lastCheck: Date;
-    status: 'HEALTHY' | 'UNHEALTHY';
+    status: "HEALTHY" | "UNHEALTHY";
     details?: Record<string, any>;
   };
 }
@@ -333,10 +328,7 @@ class ServiceRegistry {
   private readonly healthChecker: HealthChecker;
   private readonly loadBalancer: LoadBalancer;
 
-  constructor(
-    healthChecker: HealthChecker,
-    loadBalancer: LoadBalancer
-  ) {
+  constructor(healthChecker: HealthChecker, loadBalancer: LoadBalancer) {
     this.healthChecker = healthChecker;
     this.loadBalancer = loadBalancer;
   }
@@ -352,7 +344,7 @@ class ServiceRegistry {
 
   async deregister(instanceId: string): Promise<void> {
     for (const [serviceName, instances] of this.instances.entries()) {
-      const filtered = instances.filter(i => i.id !== instanceId);
+      const filtered = instances.filter((i) => i.id !== instanceId);
       if (filtered.length !== instances.length) {
         this.instances.set(serviceName, filtered);
         await this.healthChecker.stopChecking(instanceId);
@@ -367,12 +359,10 @@ class ServiceRegistry {
       version?: string;
       zone?: string;
       metadata?: Record<string, string>;
-    }
+    },
   ): Promise<ServiceInstance> {
     const instances = this.instances.get(serviceName) || [];
-    const healthyInstances = instances.filter(
-      i => i.health.status === 'HEALTHY'
-    );
+    const healthyInstances = instances.filter((i) => i.health.status === "HEALTHY");
 
     if (healthyInstances.length === 0) {
       throw new Error(`No healthy instances found for service ${serviceName}`);
@@ -381,7 +371,7 @@ class ServiceRegistry {
     // Filter by requirements
     let eligible = healthyInstances;
     if (requirements) {
-      eligible = eligible.filter(i => {
+      eligible = eligible.filter((i) => {
         if (requirements.version && i.version !== requirements.version) {
           return false;
         }
@@ -390,7 +380,7 @@ class ServiceRegistry {
         }
         if (requirements.metadata) {
           return Object.entries(requirements.metadata).every(
-            ([key, value]) => i.metadata[key] === value
+            ([key, value]) => i.metadata[key] === value,
           );
         }
         return true;
@@ -399,7 +389,7 @@ class ServiceRegistry {
 
     if (eligible.length === 0) {
       throw new Error(
-        `No eligible instances found for service ${serviceName} with requirements ${JSON.stringify(requirements)}`
+        `No eligible instances found for service ${serviceName} with requirements ${JSON.stringify(requirements)}`,
       );
     }
 
@@ -419,7 +409,7 @@ class WeightedRoundRobinLoadBalancer implements LoadBalancer {
 
   select<T extends ServiceInstance>(instances: T[]): T {
     if (instances.length === 0) {
-      throw new Error('No instances available');
+      throw new Error("No instances available");
     }
 
     const serviceName = instances[0].name;
@@ -450,7 +440,7 @@ class WeightedRoundRobinLoadBalancer implements LoadBalancer {
     let weight = 100;
 
     // Adjust based on health
-    if (instance.health.status === 'UNHEALTHY') {
+    if (instance.health.status === "UNHEALTHY") {
       return 0;
     }
 
@@ -463,7 +453,7 @@ class WeightedRoundRobinLoadBalancer implements LoadBalancer {
     // Adjust based on error rate (example metric)
     const errorRate = instance.health.details?.errorRate as number;
     if (errorRate) {
-      weight *= (1 - errorRate);
+      weight *= 1 - errorRate;
     }
 
     return weight;
@@ -481,7 +471,7 @@ interface Span {
   spanId: string;
   parentSpanId?: string;
   name: string;
-  kind: 'SERVER' | 'CLIENT' | 'PRODUCER' | 'CONSUMER';
+  kind: "SERVER" | "CLIENT" | "PRODUCER" | "CONSUMER";
   startTime: number;
   endTime?: number;
   attributes: Record<string, string | number | boolean>;
@@ -496,7 +486,7 @@ interface SpanEvent {
 }
 
 interface SpanStatus {
-  code: 'OK' | 'ERROR' | 'UNSET';
+  code: "OK" | "ERROR" | "UNSET";
   message?: string;
   stackTrace?: string;
 }
@@ -506,10 +496,7 @@ class DistributedTracer {
   private readonly samplingRate: number;
   private readonly exporters: SpanExporter[];
 
-  constructor(
-    samplingRate: number = 1.0,
-    exporters: SpanExporter[] = []
-  ) {
+  constructor(samplingRate: number = 1.0, exporters: SpanExporter[] = []) {
     this.samplingRate = samplingRate;
     this.exporters = exporters;
   }
@@ -517,10 +504,10 @@ class DistributedTracer {
   startSpan(
     name: string,
     options: {
-      kind: Span['kind'];
+      kind: Span["kind"];
       parentSpanId?: string;
       attributes?: Record<string, string | number | boolean>;
-    }
+    },
   ): Span {
     // Implement sampling decision
     if (Math.random() > this.samplingRate) {
@@ -528,8 +515,8 @@ class DistributedTracer {
     }
 
     const span: Span = {
-      traceId: options.parentSpanId 
-        ? this.spans.get(options.parentSpanId)?.traceId 
+      traceId: options.parentSpanId
+        ? this.spans.get(options.parentSpanId)?.traceId
         : generateTraceId(),
       spanId: generateSpanId(),
       parentSpanId: options.parentSpanId,
@@ -538,7 +525,7 @@ class DistributedTracer {
       startTime: Date.now(),
       attributes: options.attributes || {},
       events: [],
-      status: { code: 'UNSET' }
+      status: { code: "UNSET" },
     };
 
     this.spans.set(span.spanId, span);
@@ -561,7 +548,7 @@ class DistributedTracer {
   addEvent(
     spanId: string,
     name: string,
-    attributes?: Record<string, string | number | boolean>
+    attributes?: Record<string, string | number | boolean>,
   ): void {
     const span = this.spans.get(spanId);
     if (!span) return;
@@ -569,17 +556,17 @@ class DistributedTracer {
     span.events.push({
       name,
       timestamp: Date.now(),
-      attributes
+      attributes,
     });
   }
 
   private async exportSpan(span: Span): Promise<void> {
     await Promise.all(
-      this.exporters.map(exporter =>
-        exporter.export(span).catch(error => {
+      this.exporters.map((exporter) =>
+        exporter.export(span).catch((error) => {
           console.error(`Error exporting span ${span.spanId}:`, error);
-        })
-      )
+        }),
+      ),
     );
   }
 }
@@ -588,70 +575,70 @@ class DistributedTracer {
 async function handlePayment(
   orderId: string,
   amount: number,
-  tracer: DistributedTracer
+  tracer: DistributedTracer,
 ): Promise<void> {
-  const rootSpan = tracer.startSpan('process-payment', {
-    kind: 'SERVER',
+  const rootSpan = tracer.startSpan("process-payment", {
+    kind: "SERVER",
     attributes: {
-      'order.id': orderId,
-      'payment.amount': amount
-    }
+      "order.id": orderId,
+      "payment.amount": amount,
+    },
   });
 
   try {
     // Validate order
-    const validateSpan = tracer.startSpan('validate-order', {
-      kind: 'CLIENT',
+    const validateSpan = tracer.startSpan("validate-order", {
+      kind: "CLIENT",
       parentSpanId: rootSpan.spanId,
-      attributes: { 'order.id': orderId }
+      attributes: { "order.id": orderId },
     });
 
     try {
       await validateOrder(orderId);
-      tracer.endSpan(validateSpan.spanId, { code: 'OK' });
+      tracer.endSpan(validateSpan.spanId, { code: "OK" });
     } catch (error) {
-      tracer.addEvent(validateSpan.spanId, 'validation-failed', {
-        'error.message': error.message
+      tracer.addEvent(validateSpan.spanId, "validation-failed", {
+        "error.message": error.message,
       });
       tracer.endSpan(validateSpan.spanId, {
-        code: 'ERROR',
+        code: "ERROR",
         message: error.message,
-        stackTrace: error.stack
+        stackTrace: error.stack,
       });
       throw error;
     }
 
     // Process payment
-    const paymentSpan = tracer.startSpan('process-payment-transaction', {
-      kind: 'CLIENT',
+    const paymentSpan = tracer.startSpan("process-payment-transaction", {
+      kind: "CLIENT",
       parentSpanId: rootSpan.spanId,
       attributes: {
-        'payment.amount': amount,
-        'payment.currency': 'USD'
-      }
+        "payment.amount": amount,
+        "payment.currency": "USD",
+      },
     });
 
     try {
       await processPaymentTransaction(amount);
-      tracer.endSpan(paymentSpan.spanId, { code: 'OK' });
+      tracer.endSpan(paymentSpan.spanId, { code: "OK" });
     } catch (error) {
-      tracer.addEvent(paymentSpan.spanId, 'payment-failed', {
-        'error.message': error.message
+      tracer.addEvent(paymentSpan.spanId, "payment-failed", {
+        "error.message": error.message,
       });
       tracer.endSpan(paymentSpan.spanId, {
-        code: 'ERROR',
+        code: "ERROR",
         message: error.message,
-        stackTrace: error.stack
+        stackTrace: error.stack,
       });
       throw error;
     }
 
-    tracer.endSpan(rootSpan.spanId, { code: 'OK' });
+    tracer.endSpan(rootSpan.spanId, { code: "OK" });
   } catch (error) {
     tracer.endSpan(rootSpan.spanId, {
-      code: 'ERROR',
+      code: "ERROR",
       message: error.message,
-      stackTrace: error.stack
+      stackTrace: error.stack,
     });
     throw error;
   }
@@ -672,7 +659,7 @@ interface CircuitBreakerConfig {
 }
 
 class CircuitBreaker {
-  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
+  private state: "CLOSED" | "OPEN" | "HALF_OPEN" = "CLOSED";
   private failureCount = 0;
   private lastFailureTime?: number;
   private halfOpenCallCount = 0;
@@ -680,17 +667,14 @@ class CircuitBreaker {
 
   constructor(
     private readonly config: CircuitBreakerConfig,
-    private readonly metricsRegistry: MetricsRegistry
+    private readonly metricsRegistry: MetricsRegistry,
   ) {
     this.metrics = new CircuitBreakerMetrics(metricsRegistry);
     this.startMonitoring();
   }
 
-  async execute<T>(
-    command: () => Promise<T>,
-    fallback?: (error: Error) => Promise<T>
-  ): Promise<T> {
-    if (this.state === 'OPEN') {
+  async execute<T>(command: () => Promise<T>, fallback?: (error: Error) => Promise<T>): Promise<T> {
+    if (this.state === "OPEN") {
       if (this.shouldReset()) {
         this.transitionToHalfOpen();
       } else {
@@ -699,25 +683,22 @@ class CircuitBreaker {
       }
     }
 
-    if (this.state === 'HALF_OPEN' && this.halfOpenCallCount >= this.config.halfOpenMaxCalls) {
+    if (this.state === "HALF_OPEN" && this.halfOpenCallCount >= this.config.halfOpenMaxCalls) {
       const error = new CircuitBreakerOpenError();
       return fallback ? fallback(error) : Promise.reject(error);
     }
 
     try {
       const startTime = Date.now();
-      if (this.state === 'HALF_OPEN') {
+      if (this.state === "HALF_OPEN") {
         this.halfOpenCallCount++;
       }
 
       const result = await Promise.race([
         command(),
-        new Promise((_, reject) => 
-          setTimeout(
-            () => reject(new TimeoutError()),
-            this.config.timeoutDuration
-          )
-        )
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new TimeoutError()), this.config.timeoutDuration),
+        ),
       ]);
 
       this.onSuccess(Date.now() - startTime);
@@ -734,7 +715,7 @@ class CircuitBreaker {
   private onSuccess(duration: number): void {
     this.metrics.recordSuccess(duration);
 
-    if (this.state === 'HALF_OPEN') {
+    if (this.state === "HALF_OPEN") {
       this.transitionToClosed();
     }
 
@@ -746,31 +727,28 @@ class CircuitBreaker {
     this.failureCount++;
     this.lastFailureTime = Date.now();
 
-    if (
-      this.state === 'CLOSED' &&
-      this.failureCount >= this.config.failureThreshold
-    ) {
+    if (this.state === "CLOSED" && this.failureCount >= this.config.failureThreshold) {
       this.transitionToOpen();
-    } else if (this.state === 'HALF_OPEN') {
+    } else if (this.state === "HALF_OPEN") {
       this.transitionToOpen();
     }
   }
 
   private transitionToOpen(): void {
-    this.state = 'OPEN';
-    this.metrics.recordStateChange('OPEN');
+    this.state = "OPEN";
+    this.metrics.recordStateChange("OPEN");
     this.halfOpenCallCount = 0;
   }
 
   private transitionToHalfOpen(): void {
-    this.state = 'HALF_OPEN';
-    this.metrics.recordStateChange('HALF_OPEN');
+    this.state = "HALF_OPEN";
+    this.metrics.recordStateChange("HALF_OPEN");
     this.halfOpenCallCount = 0;
   }
 
   private transitionToClosed(): void {
-    this.state = 'CLOSED';
-    this.metrics.recordStateChange('CLOSED');
+    this.state = "CLOSED";
+    this.metrics.recordStateChange("CLOSED");
     this.failureCount = 0;
     this.halfOpenCallCount = 0;
   }
@@ -787,7 +765,7 @@ class CircuitBreaker {
       this.metrics.updateMetrics({
         state: this.state,
         failureCount: this.failureCount,
-        halfOpenCallCount: this.halfOpenCallCount
+        halfOpenCallCount: this.halfOpenCallCount,
       });
     }, this.config.monitorInterval);
   }
@@ -800,10 +778,10 @@ class CircuitBreakerMetrics {
   private readonly stateGauge: Gauge;
 
   constructor(registry: MetricsRegistry) {
-    this.successCounter = registry.createCounter('circuit_breaker_success_total');
-    this.failureCounter = registry.createCounter('circuit_breaker_failure_total');
-    this.latencyHistogram = registry.createHistogram('circuit_breaker_latency');
-    this.stateGauge = registry.createGauge('circuit_breaker_state');
+    this.successCounter = registry.createCounter("circuit_breaker_success_total");
+    this.failureCounter = registry.createCounter("circuit_breaker_failure_total");
+    this.latencyHistogram = registry.createHistogram("circuit_breaker_latency");
+    this.stateGauge = registry.createGauge("circuit_breaker_state");
   }
 
   recordSuccess(duration: number): void {
@@ -815,15 +793,11 @@ class CircuitBreakerMetrics {
     this.failureCounter.inc({ error: error.name });
   }
 
-  recordStateChange(state: 'OPEN' | 'HALF_OPEN' | 'CLOSED'): void {
+  recordStateChange(state: "OPEN" | "HALF_OPEN" | "CLOSED"): void {
     this.stateGauge.set({ state }, 1);
   }
 
-  updateMetrics(metrics: {
-    state: string;
-    failureCount: number;
-    halfOpenCallCount: number;
-  }): void {
+  updateMetrics(metrics: { state: string; failureCount: number; halfOpenCallCount: number }): void {
     // Update additional metrics as needed
   }
 }
@@ -834,6 +808,7 @@ class CircuitBreakerMetrics {
 This deep dive into advanced microservices patterns demonstrates the complexity and sophistication required for building robust distributed systems. Each pattern addresses specific challenges in scalability, resilience, and maintainability.
 
 Key takeaways:
+
 1. Service mesh provides sophisticated traffic management and security
 2. Event sourcing with CQRS enables complex state management
 3. Advanced service discovery ensures reliable communication
@@ -850,4 +825,4 @@ Remember that these patterns should be implemented based on your specific requir
 4. Adjust and optimize based on real-world performance
 5. Consider the operational complexity these patterns add
 
-Stay tuned for more deep dives into other advanced architectural patterns and implementations. 
+Stay tuned for more deep dives into other advanced architectural patterns and implementations.

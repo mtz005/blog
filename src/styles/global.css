@@ -35,10 +35,13 @@
   }
 
   /* Simple theme transition */
-  body, a, button {
-    transition: background-color var(--theme-transition), 
-                color var(--theme-transition), 
-                border-color var(--theme-transition);
+  body,
+  a,
+  button {
+    transition:
+      background-color var(--theme-transition),
+      color var(--theme-transition),
+      border-color var(--theme-transition);
   }
 
   /* Typography prose overrides */
@@ -68,33 +71,55 @@
   html {
     scroll-padding-top: 4rem;
   }
-  
+
   /* Better touch targets on mobile */
-  button, a {
+  button,
+  a {
     @apply min-h-[44px];
   }
 }
 
-
 /* Add smooth animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideDown {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes scaleIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* Apply animations to elements */
@@ -132,17 +157,21 @@
 }
 
 /* Smooth hover transitions */
-a, button {
+a,
+button {
   transition: all 0.2s ease;
 }
 
-a:hover, button:hover {
+a:hover,
+button:hover {
   transform: translateY(-1px);
 }
 
 /* Smooth page transitions */
 .page-transition {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .page-entering {
