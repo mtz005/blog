@@ -4,6 +4,10 @@ import react from "@astrojs/react";
 
 // Determine site URL based on environment
 const getSiteURL = () => {
+	// For GitHub Pages deployment
+	if (process.env.GITHUB_PAGES_SITE) {
+		return process.env.GITHUB_PAGES_SITE;
+	}
 	// For Vercel production deployment
 	if (process.env.VERCEL_URL) {
 		return `https://${process.env.VERCEL_URL}`;
@@ -19,6 +23,7 @@ const getSiteURL = () => {
 // https://astro.build/config
 export default defineConfig({
 	site: getSiteURL(),
+	base: process.env.BASE_PATH || "/",
 	integrations: [react()],
 	vite: {
 		plugins: [tailwindcss()],
