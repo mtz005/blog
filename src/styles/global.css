@@ -9,8 +9,11 @@
 @layer base {
   :root {
     font-family: "Inter", sans-serif;
+    --font-heading: "Plus Jakarta Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    
 
     /* ─── Theme transition ───────────────────────────────────────── */
     --theme-transition-duration: 0.4s;
@@ -53,6 +56,11 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-heading);
   }
 
   body {
