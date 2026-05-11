@@ -70,14 +70,11 @@
     overflow-x: hidden;
   }
 
-  /* Default theme transition on interactive elements */
-  body,
-  a,
-  button {
+  /* Default theme transition on body */
+  body {
     transition:
       background-color var(--theme-transition),
-      color var(--theme-transition),
-      border-color var(--theme-transition);
+      color var(--theme-transition);
   }
 
   /* Typography prose overrides */
@@ -261,15 +258,15 @@
   animation-delay: 0.4s;
 }
 
-/* Smooth hover transitions */
+/* Hover transitions — specific properties only, never transition:all */
 a,
 button {
-  transition: all 0.2s ease;
-}
-
-a:hover,
-button:hover {
-  transform: translateY(-1px);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 /* Smooth page transitions */
