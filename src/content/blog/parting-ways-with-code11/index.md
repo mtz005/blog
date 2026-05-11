@@ -12,8 +12,6 @@ tags:
 ---
 
   
-# Parting ways with CODE11
-
 After almost 18 years at CODE11 (even before it had that name), I've decided to part ways. To say the writing was on the wall would be an understatement; it's as if Banksy was in the room spraying "Get out!!" on the walls and hitting me over the head with the can, while I stood there going, "Hmmm, I wonder what this means?"
 
 The last two years have been pure cancer from a professional perspective. Yes, there were ups and downs as there always are, but the trajectory was clearly downward, and the downs severely outnumbered the ups.

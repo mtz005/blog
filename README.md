@@ -26,7 +26,8 @@ npm run ingest
 npm run ingest -- 2026-05-11-parting-ways-with-code11
 
 # Re-ingest / overwrite an existing post
-npm run ingest -- --force 2026-05-11-parting-ways-with-code11
+npm run ingest -- --force 2026-04-29-parting-ways-with-code11
+npm run ingest -- --force 2026-05-11-hello-world
 ```
 
 After ingesting, commit and push to deploy:
