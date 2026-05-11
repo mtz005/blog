@@ -534,43 +534,6 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
 </script>
 
 <style>
-  /* Fix for theme transition issues */
-  :global(:root) {
-    --theme-transition-duration: 0.5s;
-    --theme-transition-timing: ease;
-  }
-
-  :global(html),
-  :global(body) {
-    transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
-  }
-
-  :global(.theme-transition-all) {
-    transition: all var(--theme-transition-duration) var(--theme-transition-timing);
-  }
-
-  :global(.theme-transition-bg) {
-    transition: background-color var(--theme-transition-duration) var(--theme-transition-timing);
-  }
-
-  :global(.theme-transition-color) {
-    transition: color var(--theme-transition-duration) var(--theme-transition-timing);
-  }
-
-  /* Ensure transitions apply to all theme-related properties */
-  :global(*) {
-    transition-property: background-color, border-color, color, fill, stroke, opacity;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-timing);
-  }
-
-  /* Remove the forced transition disabling which causes flickering */
-  :global(.theme-switching),
-  :global(.theme-switching *) {
-    /* Use a subtle transition instead of none */
-    transition-duration: 0.3s !important;
-  }
-
   /* Content reveal animations */
   .hero-text span,
   .hero-text + p,

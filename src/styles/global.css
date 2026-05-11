@@ -11,7 +11,22 @@
     font-family: "Inter", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    --theme-transition: 0.3s ease;
+
+    /* ─── Theme transition ───────────────────────────────────────── */
+    --theme-transition-duration: 0.4s;
+    --theme-transition-timing: ease;
+    --theme-transition: var(--theme-transition-duration) var(--theme-transition-timing);
+
+    /* ─── Semantic colour tokens — light mode ────────────────────── */
+    --color-bg:          255 255 255;   /* white   */
+    --color-bg-surface:  244 244 245;   /* zinc-100 */
+    --color-bg-elevated: 250 250 250;   /* zinc-50  */
+    --color-border:      228 228 231;   /* zinc-200 */
+    --color-text:         24  24  27;   /* zinc-900 */
+    --color-text-muted:  113 113 122;   /* zinc-500 */
+    --color-text-subtle: 161 161 170;   /* zinc-400 */
+    --color-primary:      24  24  27;   /* zinc-900 — main accent / underlines */
+    --color-primary-fg:  255 255 255;   /* white    — text on primary bg       */
 
     /* Typography plugin theme overrides (replaces theme.extend.typography) */
     --tw-prose-links: var(--color-zinc-900);
@@ -20,6 +35,19 @@
     --tw-prose-invert-links: var(--color-zinc-100);
     --tw-prose-invert-headings: var(--color-zinc-100);
     --tw-prose-invert-code: var(--color-zinc-100);
+  }
+
+  /* ─── Dark-mode overrides ──────────────────────────────────────── */
+  :root.dark {
+    --color-bg:          24  24  27;   /* zinc-900 */
+    --color-bg-surface:  39  39  42;   /* zinc-800 */
+    --color-bg-elevated: 63  63  70;   /* zinc-700 */
+    --color-border:      63  63  70;   /* zinc-700 */
+    --color-text:        244 244 245;  /* zinc-100 */
+    --color-text-muted:  161 161 170;  /* zinc-400 */
+    --color-text-subtle: 113 113 122;  /* zinc-500 */
+    --color-primary:     244 244 245;  /* zinc-100 */
+    --color-primary-fg:   24  24  27;  /* zinc-900 */
   }
 
   html {
@@ -34,7 +62,7 @@
     overflow-x: hidden;
   }
 
-  /* Simple theme transition */
+  /* Default theme transition on interactive elements */
   body,
   a,
   button {
@@ -66,6 +94,75 @@
   }
 }
 
+/* ─── Theme transition utilities ──────────────────────────────────────────── */
+
+/*
+ * Apply these classes to any element that should animate smoothly when the
+ * user switches between light and dark mode.
+ *
+ *  .theme-transition-all    — transitions every animatable property
+ *  .theme-transition-bg     — transitions background-color only
+ *  .theme-transition-color  — transitions color only
+ *  .theme-transition-border — transitions border-color only
+ *  .theme-transition-element — bg + color + border combined (common pattern)
+ */
+.theme-transition-all {
+  transition: all var(--theme-transition);
+}
+
+.theme-transition-bg {
+  transition: background-color var(--theme-transition);
+}
+
+.theme-transition-color {
+  transition: color var(--theme-transition);
+}
+
+.theme-transition-border {
+  transition: border-color var(--theme-transition);
+}
+
+.theme-transition-element {
+  transition:
+    background-color var(--theme-transition),
+    color var(--theme-transition),
+    border-color var(--theme-transition);
+}
+
+/*
+ * Added to <html> while a theme switch is in progress (via BaseLayout script).
+ * Keeps a short, snappy override rather than abrupt jumps.
+ */
+.theme-switching,
+.theme-switching * {
+  transition-duration: 0.3s !important;
+}
+
+/*
+ * Add .theme-ripple to elements that should "pulse" on theme switch.
+ * BaseLayout.astro adds .ripple-active momentarily when the toggle fires.
+ */
+.theme-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--color-primary) / 0.06);
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity var(--theme-transition);
+  pointer-events: none;
+}
+
+.theme-ripple.ripple-active::after {
+  opacity: 1;
+}
+
+/* ─── Minimal responsive styles ───────────────────────────────────────────── */
 /* Minimal responsive styles */
 @media (max-width: 640px) {
   html {
