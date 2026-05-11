@@ -121,14 +121,18 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
 
               // Run scripts in the new content
               Array.from(newContent.querySelectorAll("script")).forEach((oldScript) => {
+                const src = oldScript.getAttribute("src");
+                // Skip external scripts already present in the document to avoid re-declaring
+                // top-level const/let identifiers (e.g. cusdis.es.js's makeIframeContent)
+                if (src && document.querySelector(`script[src="${src}"]`)) {
+                  return;
+                }
                 const newScript = document.createElement("script");
                 Array.from(oldScript.attributes).forEach((attr) => {
                   newScript.setAttribute(attr.name, attr.value);
                 });
                 newScript.textContent = oldScript.textContent;
-                if (oldScript.parentNode) {
-                  mainContent.appendChild(newScript);
-                }
+                mainContent.appendChild(newScript);
               });
             }
 
@@ -156,6 +160,12 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
                 pageTransition.classList.add("opacity-0", "pointer-events-none");
                 pageTransition.classList.remove("opacity-100");
               }, 200);
+            }
+
+            // Re-initialize Cusdis if the new page has a comment thread
+            const cusdisThread = document.getElementById("cusdis_thread");
+            if (cusdisThread && (window as any).CUSDIS) {
+              (window as any).CUSDIS.renderTo(cusdisThread);
             }
 
             // Dispatch custom event for content loaded
