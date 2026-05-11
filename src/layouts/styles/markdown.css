@@ -13,6 +13,7 @@ article.article-entering {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -222,13 +223,12 @@ article .heading-visible {
   list-style-type: decimal;
 }
 
-.markdown-content li {
+.markdown-content li+li {
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
-.markdown-content li > ul,
-.markdown-content li > ol {
+.markdown-content li>ul,
+.markdown-content li>ol {
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
