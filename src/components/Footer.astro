@@ -142,6 +142,7 @@ const socialLinks = [
             class="theme-transition-color relative flex inline-block items-center pb-2 text-sm font-semibold tracking-wider text-zinc-900 uppercase after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-8 after:bg-zinc-300 after:content-[''] dark:text-zinc-100 dark:after:bg-zinc-700"
           >
             <span
+              id="now-playing-dot"
               class="pulse-dot mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-[#1DB954]"
             ></span>
             NOW PLAYING
@@ -410,6 +411,7 @@ const socialLinks = [
     const currentTimeEl = document.getElementById("current-time");
     const totalTimeEl = document.getElementById("total-time");
     const nowPlayingEl = document.getElementById("spotify-now-playing");
+    const dotEl = document.getElementById("now-playing-dot");
 
     if (
       !data ||
@@ -432,6 +434,10 @@ const socialLinks = [
       if (currentTimeEl) currentTimeEl.textContent = "0:00";
       if (totalTimeEl) totalTimeEl.textContent = "0:00";
       if (nowPlayingEl) nowPlayingEl.classList.remove("is-playing");
+      if (dotEl) {
+        dotEl.classList.remove("animate-pulse", "bg-[#1DB954]");
+        dotEl.classList.add("dot-idle");
+      }
 
       // Clear any progress interval
       if (progressInterval) {
@@ -487,6 +493,10 @@ const socialLinks = [
 
     // Add playing class
     nowPlayingEl.classList.add("is-playing");
+    if (dotEl) {
+      dotEl.classList.remove("dot-idle");
+      dotEl.classList.add("animate-pulse", "bg-[#1DB954]");
+    }
 
     // Update progress and start real-time progress
     if (data.progress_ms !== undefined && data.item.duration_ms) {
@@ -728,6 +738,16 @@ const socialLinks = [
       transform: scale(2.5);
       opacity: 0;
     }
+  }
+
+  /* Dot idle state — not currently playing */
+  .dot-idle {
+    background-color: #71717a !important;
+    animation: none !important;
+  }
+
+  .dot-idle::after {
+    display: none !important;
   }
 
   /* Improved hover effects */
