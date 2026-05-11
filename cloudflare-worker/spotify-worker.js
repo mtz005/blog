@@ -110,6 +110,13 @@ export default {
       }
 
       const data = await spotifyRes.json();
+
+      if (data.currently_playing_type !== "track") {
+        return new Response(JSON.stringify({ isPlaying: false }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
       return new Response(JSON.stringify({ isPlaying: true, ...data }), {
         headers: {
           ...corsHeaders,
