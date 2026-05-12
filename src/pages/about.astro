@@ -1,40 +1,63 @@
 ---
 export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { FaJs, FaReact, FaNodeJs, FaPython } from "react-icons/fa";
-import { SiTypescript, SiAstro } from "react-icons/si";
+import {
+  FaJs,
+  FaReact,
+  FaSearch,
+  FaCode,
+  FaTasks,
+  FaUsers,
+  FaDraftingCompass,
+  FaHtml5,
+  FaRobot,
+} from "react-icons/fa";
 
-// Thông tin kỹ năng với logo ngôn ngữ lập trình
 const skills = [
   {
-    name: "JavaScript",
+    name: "Product Discovery",
+    level: 95,
+    icon: FaSearch,
+  },
+  {
+    name: "Rapid Prototyping",
+    level: 95,
+    icon: FaCode,
+  },
+  {
+    name: "Production Management",
+    level: 95,
+    icon: FaTasks,
+  },
+  {
+    name: "Stakeholder Alignment",
     level: 90,
+    icon: FaUsers,
+  },
+  {
+    name: "UX / Wireframing",
+    level: 90,
+    icon: FaDraftingCompass,
+  },
+  {
+    name: "HTML / CSS",
+    level: 95,
+    icon: FaHtml5,
+  },
+  {
+    name: "JavaScript",
+    level: 75,
     icon: FaJs,
   },
   {
-    name: "TypeScript",
-    level: 85,
-    icon: SiTypescript,
-  },
-  {
     name: "React",
-    level: 88,
+    level: 80,
     icon: FaReact,
   },
   {
-    name: "Node.js",
-    level: 82,
-    icon: FaNodeJs,
-  },
-  {
-    name: "Python",
-    level: 75,
-    icon: FaPython,
-  },
-  {
-    name: "Astro",
-    level: 80,
-    icon: SiAstro,
+    name: "AI Workflows (N8N)",
+    level: 70,
+    icon: FaRobot,
   },
 ];
 ---
@@ -60,15 +83,15 @@ const skills = [
           >
             Hello, I'm <span
               class="theme-transition-all bg-gradient-to-r from-zinc-500 to-zinc-900 bg-clip-text text-transparent dark:from-zinc-300 dark:to-zinc-100"
-              >John Doe</span
+              >Braescu Mircea Cristian</span
             >
           </h1>
 
           <p
             class="theme-transition-color mb-6 text-lg leading-relaxed text-zinc-600 sm:mb-8 sm:text-xl dark:text-zinc-400"
           >
-            A designer and developer with a passion for creating clean, functional, and beautiful
-            digital experiences.
+            A product manager with 10 years of PM experience and 20 years of technical depth -
+            bridging discovery, design, and engineering.
           </p>
 
           <div
@@ -117,13 +140,20 @@ const skills = [
 
         <div class="prose prose-zinc dark:prose-invert theme-transition-all max-w-none">
           <p class="theme-transition-color mb-4 text-base leading-relaxed sm:mb-6 sm:text-lg">
-            I'm a designer and developer with a passion for creating clean, functional, and
-            beautiful digital experiences. With over 5 years of experience in the industry, I've
-            worked on a variety of projects from small personal websites to large enterprise
-            applications.
+            I'm a Product Manager who grew from Flash developer → UI designer → front-end developer
+            → PM through hands-on progression. I spent 5+ years as delivery PM on <a
+              href="https://www.verified.eu/"
+              target="_blank">verified.eu</a
+            > a B2B RegTech platform that was acquired for €31M, then led product discovery across multiple
+            AI-native and SaaS products as CPO at a product studio.
           </p>
 
-          <!-- Other paragraphs remain the same -->
+          <p class="theme-transition-color mb-4 text-base leading-relaxed sm:mb-6 sm:text-lg">
+            I work at the intersection of product, design, and engineering: fluent in API docs, DB
+            schemas, and front-end code. I build AI-assisted discovery workflows and use rapid
+            prototyping as my primary alignment tool. I think in systems - user flows, data
+            structures, operational models - not just features.
+          </p>
         </div>
       </div>
     </div>
@@ -136,59 +166,34 @@ const skills = [
         Tech Stack
       </h2>
 
-      <div class="tech-stack-slider relative overflow-hidden py-4 sm:py-8">
-        <!-- Main slider container -->
-        <div class="slider-track animate-slide flex">
-          {
-            [...skills, ...skills, ...skills].map((skill, index) => (
-              <div
-                key={`${skill.name}-${index}`}
-                class="skill-card theme-transition-element mx-2 min-w-[220px] transform rounded-md border border-zinc-200 bg-white transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:border-zinc-300 hover:shadow-xl sm:mx-4 sm:min-w-[280px] dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:border-zinc-600"
-              >
-                <div class="p-4 sm:p-6">
-                  <div class="mb-4 flex items-center justify-between sm:mb-6">
-                    <div class="flex items-center gap-2 sm:gap-4">
-                      <div class="theme-transition-bg theme-transition-color flex h-8 w-8 transform items-center justify-center rounded-lg bg-zinc-100 text-zinc-800 transition-transform group-hover:rotate-12 sm:h-12 sm:w-12 dark:bg-zinc-800 dark:text-zinc-200">
-                        <skill.icon
-                          size={20}
-                          className="sm:text-2xl transform transition-all hover:scale-125"
-                        />
-                      </div>
-                      <h3 class="theme-transition-color text-base font-semibold text-zinc-900 sm:text-xl dark:text-zinc-100">
-                        {skill.name}
-                      </h3>
-                    </div>
-                    <span class="theme-transition-all rounded-full bg-zinc-100 px-2 py-0.5 font-mono text-xs text-zinc-600 sm:px-2.5 sm:py-1 sm:text-sm dark:bg-zinc-800 dark:text-zinc-400">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {
+          skills.map((skill) => (
+            <div class="skill-card theme-transition-element transform rounded-md border border-zinc-200 bg-white transition-all duration-300 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-800/50 dark:hover:border-zinc-600">
+              <div class="flex items-center gap-4 p-5">
+                <div class="theme-transition-bg theme-transition-color flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                  <skill.icon size={18} />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="mb-2 flex items-center justify-between gap-2">
+                    <h3 class="theme-transition-color truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                      {skill.name}
+                    </h3>
+                    <span class="theme-transition-all shrink-0 font-mono text-xs text-zinc-500 dark:text-zinc-400">
                       {skill.level}%
                     </span>
                   </div>
-
-                  <div class="theme-transition-bg relative h-1.5 w-full overflow-hidden rounded-full bg-zinc-100 sm:h-2 dark:bg-zinc-700">
+                  <div class="theme-transition-bg relative h-1.5 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-700">
                     <div
-                      class="progress-bar-animate theme-transition-bg absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-800 transition-all duration-1000 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-200"
+                      class="progress-bar-animate theme-transition-bg absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-800 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-200"
                       style={`width: ${skill.level}%`}
                     />
                   </div>
-
-                  <div class="theme-transition-color mt-1 flex justify-between font-mono text-[10px] text-zinc-400 sm:mt-2 sm:text-xs dark:text-zinc-500">
-                    <span>Beginner</span>
-                    <span>Advanced</span>
-                  </div>
                 </div>
               </div>
-            ))
-          }
-        </div>
-
-        <!-- Gradient overlays for smooth fade effect -->
-        <div
-          class="theme-transition-bg absolute top-0 bottom-0 left-0 z-10 w-12 bg-gradient-to-r from-white to-transparent sm:w-24 dark:from-zinc-900"
-        >
-        </div>
-        <div
-          class="theme-transition-bg absolute top-0 right-0 bottom-0 z-10 w-12 bg-gradient-to-l from-white to-transparent sm:w-24 dark:from-zinc-900"
-        >
-        </div>
+            </div>
+          ))
+        }
       </div>
     </div>
 
@@ -207,7 +212,7 @@ const skills = [
       </p>
 
       <a
-        href="mailto:hello@example.com"
+        href="mailto:mtz@outlook.com"
         class="theme-transition-all inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition-colors hover:bg-zinc-700 sm:px-8 sm:py-4 sm:text-lg dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
       >
         <svg
@@ -254,40 +259,6 @@ const skills = [
     75% {
       transform: translate(-5%, 5%) scale(0.95);
     }
-  }
-
-  /* Tech Stack Slider - Seamless infinite loop */
-  .slider-track {
-    width: fit-content;
-    animation: scroll 40s linear infinite;
-  }
-
-  @keyframes scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(calc(-220px * 6 - 16px * 6)); /* Card width + margin for mobile */
-    }
-  }
-
-  @media (min-width: 640px) {
-    .slider-track {
-      animation: scroll 60s linear infinite;
-    }
-
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(calc(-280px * 6 - 32px * 6)); /* Card width + margin for desktop */
-      }
-    }
-  }
-
-  .tech-stack-slider:hover .slider-track {
-    animation-play-state: paused;
   }
 
   .skill-card {
@@ -390,117 +361,6 @@ const skills = [
       transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 </style>
-
-<script>
-  // Wait for the DOM to be fully loaded
-  document.addEventListener("DOMContentLoaded", () => {
-    const sliderTrack = document.querySelector(".slider-track");
-
-    // Create seamless infinite scrolling effect
-    function setupInfiniteScroll() {
-      const cards = document.querySelectorAll(".skill-card");
-      if (!cards.length) return;
-
-      // Clone the first set of cards and append to create seamless loop
-      const firstSetCount = cards.length / 3; // We have 3 sets in the markup
-
-      // Set proper animation based on screen size
-      function updateScrollAnimation() {
-        if (window.innerWidth >= 640) {
-          sliderTrack.style.animation = "scroll 60s linear infinite";
-        } else {
-          sliderTrack.style.animation = "scroll 40s linear infinite";
-        }
-      }
-
-      updateScrollAnimation();
-      window.addEventListener("resize", updateScrollAnimation);
-    }
-
-    setupInfiniteScroll();
-
-    // Pause animation on hover/touch
-    sliderTrack?.addEventListener("mouseenter", () => {
-      sliderTrack.style.animationPlayState = "paused";
-    });
-
-    sliderTrack?.addEventListener("touchstart", () => {
-      sliderTrack.style.animationPlayState = "paused";
-    });
-
-    sliderTrack?.addEventListener("mouseleave", () => {
-      sliderTrack.style.animationPlayState = "running";
-    });
-
-    sliderTrack?.addEventListener("touchend", () => {
-      setTimeout(() => {
-        sliderTrack.style.animationPlayState = "running";
-      }, 1000); // Delay resuming animation after touch
-    });
-
-    // Add hover effects to cards - only on non-touch devices
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    const cards = document.querySelectorAll(".skill-card");
-
-    if (!isTouchDevice) {
-      cards.forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-
-          const angleX = (y - centerY) / 15;
-          const angleY = (centerX - x) / 15;
-
-          card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.08) translateZ(20px)`;
-
-          // Dynamic shadow based on tilt
-          const shadowX = (x - centerX) / 25;
-          const shadowY = (y - centerY) / 25;
-          card.style.boxShadow = `
-            ${shadowX}px ${shadowY}px 20px rgba(0, 0, 0, 0.1),
-            0 10px 20px rgba(0, 0, 0, 0.05)
-          `;
-        });
-
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "";
-          card.style.boxShadow = "";
-        });
-      });
-    } else {
-      // Simpler effects for touch devices
-      cards.forEach((card) => {
-        card.addEventListener("touchstart", () => {
-          card.classList.add("is-touched");
-        });
-
-        card.addEventListener("touchend", () => {
-          setTimeout(() => {
-            card.classList.remove("is-touched");
-          }, 300);
-        });
-      });
-    }
-
-    // Handle theme transition
-    document.addEventListener("themeChange", () => {
-      // Add special effects during theme transition
-      cards.forEach((card, index) => {
-        // Add staggered animation delay
-        setTimeout(() => {
-          card.classList.add("theme-changing");
-          setTimeout(() => {
-            card.classList.remove("theme-changing");
-          }, 600);
-        }, index * 50);
-      });
-    });
-  });
-</script>
 
 <script>
   // Handle SPA transitions for about page
