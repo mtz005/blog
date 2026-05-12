@@ -142,13 +142,111 @@ if (heroImage) {
       style="min-height: 300px"
     >
     </div>
+    <!-- Set the correct theme before Cusdis initialises so it never flashes the wrong theme -->
+    <script is:inline>
+      (function () {
+        var thread = document.getElementById("cusdis_thread");
+        if (thread) {
+          var isDark = document.documentElement.classList.contains("dark");
+          thread.setAttribute("data-theme", isDark ? "dark" : "light");
+        }
+      })();
+    </script>
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     <script>
+      // Sync Cusdis theme with the blog's dark-mode class
+      function syncCusdisTheme() {
+        const isDark = document.documentElement.classList.contains("dark");
+        const theme = isDark ? "dark" : "light";
+        const thread = document.getElementById("cusdis_thread");
+        if (!thread) return;
+
+        // Update the data attribute so Cusdis picks it up on (re)init
+        thread.setAttribute("data-theme", theme);
+
+        // If Cusdis is already initialised, use its public API to re-render
+        if (window.CUSDIS) {
+          window.CUSDIS.setTheme(theme);
+        }
+      }
+
+      // Run once on load, then watch for class changes on <html>
+      function initCusdisThemeSync() {
+        syncCusdisTheme();
+        new MutationObserver(syncCusdisTheme).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", initCusdisThemeSync);
+      document.addEventListener("astro:page-load", initCusdisThemeSync);
+
       function watchCusdisHeight() {
         const thread = document.getElementById("cusdis_thread");
         if (!thread) return;
 
+        const injectCusdisStyles = (doc) => {
+          if (doc.getElementById("cusdis-custom-styles")) return;
+          const style = doc.createElement("style");
+          style.id = "cusdis-custom-styles";
+          style.textContent = `
+            /* Reset color-scheme so the browser doesn't paint a black canvas,
+               then make the document transparent so the page background shows through */
+            html {
+              color-scheme: light !important;
+              font-family: "Inter", sans-serif;
+            }
+            html, body {
+              background: transparent !important;
+            }
+
+            /* Input fields & textarea — light mode */
+            input, textarea {
+              border-radius: 0.375rem;
+              border: 1px solid #d4d4d8;
+              padding: 0.375rem 0.625rem;
+              font-size: 0.875rem;
+              background: #fff;
+              color: #18181b;
+              transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            }
+            input:focus, textarea:focus {
+              outline: none;
+              border-color: #a1a1aa;
+              box-shadow: 0 0 0 2px rgba(161,161,170,0.25);
+            }
+
+            /* Dark-mode overrides (Cusdis adds .dark on <html> inside the iframe) */
+            .dark input, .dark textarea {
+              background: #27272a;
+              color: #f4f4f5;
+              border-color: #3f3f46;
+            }
+            .dark input:focus, .dark textarea:focus {
+              border-color: #71717a;
+              box-shadow: 0 0 0 2px rgba(113,113,122,0.25);
+            }
+
+            button {
+              border-radius: 0.375rem;
+              font-weight: 500 !important;
+              height: 44px !important;
+              background: rgba(128,128,128,0.5) !important;
+              border: none;
+            }
+            .dark button {
+              color: #FFF;
+            }
+          `;
+          doc.head.appendChild(style);
+        };
+
         const attach = (iframe) => {
+          // Allow the iframe to be transparent so the page background shows through
+          iframe.setAttribute("allowtransparency", "true");
+          iframe.style.background = "transparent";
+
           // srcdoc iframes are same-origin — we can observe their body directly
           const tryObserve = () => {
             try {
@@ -157,6 +255,7 @@ if (heroImage) {
                 setTimeout(tryObserve, 100);
                 return;
               }
+              injectCusdisStyles(iframe.contentDocument);
               new ResizeObserver(() => {
                 const h = iframe.contentDocument.body.scrollHeight;
                 if (h > 0) iframe.style.height = h + "px";
@@ -475,6 +574,11 @@ if (heroImage) {
 </script>
 
 <style>
+  /* Cusdis iframe — transparent so the page background shows through */
+  #cusdis_thread iframe {
+    background: transparent !important;
+  }
+
   /* Enhanced hero image styling */
   article img:first-of-type {
     border-radius: 1rem;
