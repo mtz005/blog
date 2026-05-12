@@ -21,9 +21,9 @@ const pathname = new URL(Astro.request.url).pathname;
 >
   <div class="mx-auto flex max-w-3xl items-center justify-between px-4">
     <!-- Logo -->
-    <a href={base} class="text-xl font-bold text-red-500 text-zinc-900 dark:text-white">
+    <a href={base} class="flex items-center text-xl font-bold text-zinc-900 dark:text-white">
       <span
-        class="inline-block h-6 w-6 [&>svg]:h-full [&>svg]:w-full"
+        class="inline-block size-8 [&>svg]:h-full [&>svg]:w-full"
         aria-label="Logo"
         set:html={logoRaw}
       />
@@ -76,7 +76,13 @@ const pathname = new URL(Astro.request.url).pathname;
   class="pointer-events-none fixed inset-0 z-50 flex flex-col bg-white opacity-0 transition-all duration-300 ease-in-out dark:bg-zinc-900"
 >
   <div class="flex items-center justify-between border-b border-zinc-100 p-4 dark:border-zinc-800">
-    <a href={base} class="text-xl font-bold text-zinc-900 dark:text-white">JD</a>
+    <a href={base} class="flex items-center text-xl font-bold text-zinc-900 dark:text-white">
+      <span
+        class="inline-block size-8 [&>svg]:h-full [&>svg]:w-full"
+        aria-label="Logo"
+        set:html={logoRaw}
+      />
+    </a>
     <button
       id="close-menu-button"
       class="rounded-md p-2 text-zinc-900 transition-colors hover:bg-zinc-100 dark:text-white dark:hover:bg-zinc-800"
