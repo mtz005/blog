@@ -208,12 +208,12 @@ const pathname = new URL(Astro.request.url).pathname;
 
       const currentScrollY = window.scrollY;
 
-      // Add shadow on scroll
-      if (currentScrollY > 10) {
-        header.classList.add("shadow-sm");
-      } else {
-        header.classList.remove("shadow-sm");
-      }
+      // // Add shadow on scroll
+      // if (currentScrollY > 10) {
+      //   header.classList.add("shadow-sm");
+      // } else {
+      //   header.classList.remove("shadow-sm");
+      // }
 
       // Update last scroll position
       lastScrollY = currentScrollY;

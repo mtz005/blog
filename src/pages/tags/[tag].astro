@@ -90,7 +90,7 @@ const relatedTags = [
           class="mb-2 flex flex-col justify-center gap-4 sm:flex-row sm:items-center sm:justify-start"
         >
           <div
-            class="tag-icon mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-zinc-100 shadow-sm sm:mx-0 dark:bg-zinc-800"
+            class="tag-icon mx-auto flex h-12 w-12 items-center justify-center rounded-md bg-zinc-100 shadow-sm sm:mx-0 dark:bg-zinc-800"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ const relatedTags = [
           <div class="flex flex-nowrap justify-center gap-2 sm:justify-start">
             {relatedTags.map((relatedTag) => (
               <a
-                  href={`${base}tags/${relatedTag}`}
+                href={`${base}tags/${relatedTag}`}
                 class="inline-flex flex-shrink-0 items-center rounded-full bg-zinc-100 px-3 py-1.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
               >
                 #{relatedTag}
@@ -168,7 +168,7 @@ const relatedTags = [
 
               <div class="flex flex-col gap-5 sm:flex-row sm:gap-6">
                 {post.data.image && (
-                  <div class="mx-auto h-40 w-full flex-shrink-0 overflow-hidden rounded-xl shadow-sm transition-all duration-300 group-hover:shadow-md sm:mx-0 sm:w-56">
+                  <div class="mx-auto h-40 w-full flex-shrink-0 overflow-hidden rounded-md shadow-sm transition-all duration-300 group-hover:shadow-md sm:mx-0 sm:w-56">
                     <img
                       src={post.data.image}
                       alt={post.data.title}

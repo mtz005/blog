@@ -170,13 +170,13 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
                   {post.data.tags.slice(0, 3).map((tag) => (
                     <a
                       href={`${base}tags/${tag}`}
-                      class="theme-transition-all inline-flex min-h-[28px] items-center rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-800 transition-colors hover:bg-zinc-200 sm:px-3 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+                      class="theme-transition-all inline-flex min-h-6 items-center rounded-full bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-800 transition-colors hover:bg-zinc-200 sm:px-3 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
                     >
                       #{tag}
                     </a>
                   ))}
                   {post.data.tags.length > 3 && (
-                    <span class="theme-transition-all inline-flex min-h-[28px] items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
+                    <span class="theme-transition-all inline-flex min-h-6 items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
                       +{post.data.tags.length - 3} more
                     </span>
                   )}
@@ -234,7 +234,7 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
               return (
                 <a
                   href={`${base}tags/${tag}`}
-                  class="group theme-transition-all flex min-h-[80px] flex-col rounded-xl border border-zinc-200 p-3 transition-all duration-300 hover:bg-zinc-50 sm:min-h-[90px] sm:p-4 md:p-6 dark:border-zinc-800 dark:hover:bg-zinc-800/70"
+                  class="group theme-transition-all flex min-h-[80px] flex-col rounded-md border border-zinc-200 p-3 transition-all duration-300 hover:bg-zinc-50 sm:min-h-[90px] sm:p-4 md:p-6 dark:border-zinc-800 dark:hover:bg-zinc-800/70"
                 >
                   <div class="mb-2 flex items-start justify-between">
                     <span class="theme-transition-color mr-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">

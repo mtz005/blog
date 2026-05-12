@@ -31,6 +31,41 @@
     --color-primary:      24  24  27;   /* zinc-900 — main accent / underlines */
     --color-primary-fg:  255 255 255;   /* white    — text on primary bg       */
 
+    /* ─── Link colours ───────────────────────────────────────────── */
+    --color-link:              var(--color-blue-600);
+    --color-link-hover:        var(--color-blue-700);
+
+    /* ─── Code block colours (always dark-surface) ───────────────── */
+    --color-code-block-bg:     var(--color-slate-800);
+    --color-code-text:         var(--color-gray-200);
+    --color-code-border:       var(--color-gray-600);
+
+    /* ─── Inline code colours ────────────────────────────────────── */
+    --color-inline-code:       var(--color-red-500);
+
+    /* ─── Blockquote / prose accents ─────────────────────────────── */
+    --color-blockquote-border: var(--color-blue-500);
+    --color-strong:            var(--color-teal-500);
+
+    /* ─── Syntax token colours ───────────────────────────────────── */
+    --color-token-comment:     var(--color-gray-500);
+    --color-token-property:    var(--color-red-500);
+    --color-token-string:      var(--color-emerald-500);
+    --color-token-operator:    var(--color-purple-600);
+    --color-token-keyword:     var(--color-blue-500);
+    --color-token-function:    var(--color-amber-500);
+    --color-token-regex:       var(--color-pink-500);
+
+    /* ─── Callout accent colours ─────────────────────────────────── */
+    --color-callout-info:      var(--color-blue-500);
+    --color-callout-warning:   var(--color-amber-500);
+    --color-callout-danger:    var(--color-red-500);
+    --color-callout-tip:       var(--color-emerald-500);
+
+    /* ─── Highlight / mark ───────────────────────────────────────── */
+    --color-mark-bg:           var(--color-amber-100);
+    --color-mark-text:         var(--color-amber-800);
+
     /* Typography plugin theme overrides (replaces theme.extend.typography) */
     --tw-prose-links: var(--color-zinc-900);
     --tw-prose-headings: var(--color-zinc-900);
@@ -51,6 +86,19 @@
     --color-text-subtle: 113 113 122;  /* zinc-500 */
     --color-primary:     244 244 245;  /* zinc-100 */
     --color-primary-fg:   24  24  27;  /* zinc-900 */
+
+    /* ─── Link colours (dark) ────────────────────────────────────── */
+    --color-link:              var(--color-blue-500);
+    --color-link-hover:        var(--color-blue-400);
+
+    /* ─── Blockquote border (dark) ───────────────────────────────── */
+    --color-blockquote-border: var(--color-blue-400);
+
+    /* ─── Inline code (dark) ─────────────────────────────────────── */
+    --color-inline-code:       var(--color-red-400);
+
+    /* ─── Mark (dark) ────────────────────────────────────────────── */
+    --color-mark-text:         var(--color-amber-400);
   }
 
   html {
@@ -148,23 +196,19 @@
  * BaseLayout.astro adds .ripple-active momentarily when the toggle fires.
  */
 .theme-ripple {
-  position: relative;
-  overflow: hidden;
+  @apply relative overflow-hidden;
 }
 
 .theme-ripple::after {
   content: "";
-  position: absolute;
-  inset: 0;
+  @apply absolute inset-0 opacity-0 pointer-events-none;
   background: rgb(var(--color-primary) / 0.06);
   border-radius: inherit;
-  opacity: 0;
   transition: opacity var(--theme-transition);
-  pointer-events: none;
 }
 
 .theme-ripple.ripple-active::after {
-  opacity: 1;
+  @apply opacity-100;
 }
 
 /* ─── Minimal responsive styles ───────────────────────────────────────────── */
@@ -277,11 +321,9 @@ button {
 }
 
 .page-entering {
-  opacity: 0;
-  transform: translateY(10px);
+  @apply opacity-0 translate-y-2.5;
 }
 
 .page-entered {
-  opacity: 1;
-  transform: translateY(0);
+  @apply opacity-100 translate-y-0;
 }
