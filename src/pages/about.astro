@@ -1,63 +1,53 @@
 ---
 export const prerender = true;
 import BaseLayout from "../layouts/BaseLayout.astro";
-import {
-  FaJs,
-  FaReact,
-  FaSearch,
-  FaCode,
-  FaTasks,
-  FaUsers,
-  FaDraftingCompass,
-  FaHtml5,
-  FaRobot,
-} from "react-icons/fa";
+import { Search, Code2, ListChecks, Users, PenTool, FileCode, Braces, Atom, Bot } from "lucide-react";
 
 const skills = [
   {
     name: "Product Discovery",
     level: 95,
-    icon: FaSearch,
+    icon: Search,
   },
   {
     name: "Rapid Prototyping",
     level: 95,
-    icon: FaCode,
+    icon: Code2,
   },
   {
     name: "Production Management",
     level: 95,
-    icon: FaTasks,
+    icon: ListChecks,
   },
   {
     name: "Stakeholder Alignment",
     level: 90,
-    icon: FaUsers,
+    icon: Users,
   },
   {
     name: "UX / Wireframing",
     level: 90,
-    icon: FaDraftingCompass,
+    icon: PenTool,
   },
   {
     name: "HTML / CSS",
     level: 95,
-    icon: FaHtml5,
+    icon: FileCode,
   },
   {
     name: "JavaScript",
     level: 75,
-    icon: FaJs,
+    icon: Braces,
   },
   {
     name: "React",
     level: 80,
-    icon: FaReact,
+    icon: Atom,
   },
   {
     name: "AI Workflows",
     level: 80,
-    icon: FaRobot,
+    icon: Bot,
   },
 ];
 ---
@@ -122,7 +112,9 @@ const skills = [
           ></span>
         </h2>
 
-        <div class="prose prose-zinc dark:prose-invert theme-transition-element max-w-none">
+        <div
+          class="prose markdown-content prose-zinc dark:prose-invert theme-transition-element max-w-none"
+        >
           <p class="theme-transition-color mb-4 text-base leading-relaxed sm:mb-6 sm:text-lg">
             I'm a Product Manager who grew from Flash developer → UI designer → front-end developer
             → PM through hands-on progression. I spent 5+ years as delivery PM on <a

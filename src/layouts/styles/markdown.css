@@ -110,7 +110,7 @@ article .heading-visible {
 
 /* Links */
 .markdown-content a {
-  @apply underline;
+  @apply underline !inline;
 }
 
 /* Bold */
@@ -241,6 +241,10 @@ article .heading-visible {
 .markdown-content table {
   @apply w-full border-collapse text-left text-sm overflow-x-auto rounded-md border;
   border-color: rgb(var(--color-border));
+}
+
+.markdown-content table tr:has(th:empty) {
+  display: none;
 }
 
 .markdown-content table th {

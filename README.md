@@ -1,4 +1,21 @@
-# Blog
+# mirkea.com — personal blog
+
+My corner of the internet where I document building a product from scratch, lessons learned after 20 years in software, and whatever else earns a post.
+
+Built with [Astro](https://astro.build/) and hosted on [GitHub Pages](https://pages.github.com/), with Cloudflare in front for CDN and web analytics. Theming courtesy of [astro-blog by William Cachamwri](https://github.com/williamcachamwri/astro-blog), comments via [Cusdis](https://cusdis.com/), and a Spotify "now playing" widget powered by a Cloudflare Worker to keep API keys off the client.
+
+The whole thing went from idea to live in under a day - [here's how](https://mircea.io/blog/hello-world).
+
+## Stack
+
+| Concern         | Tool                                                         |
+| --------------- | ------------------------------------------------------------ |
+| Framework       | [Astro](https://astro.build/)                                |
+| Hosting         | GitHub Pages                                                 |
+| Theme           | [astro-blog](https://github.com/williamcachamwri/astro-blog) |
+| CDN & analytics | Cloudflare                                                   |
+| Comments        | [Cusdis](https://cusdis.com/)                                |
+| Spotify widget  | Astro theme + Cloudflare Worker                              |
 
 ## Development
 
@@ -10,30 +27,15 @@ npm run preview  # preview production build locally
 
 ## Publishing a post
 
-Posts are authored in the Windows writing workspace at `D:\mirkea\projects\blog\posts\`.
-Each post lives in a folder named `YYYY-MM-DD-slug\` and contains `_index.md` plus any images.
+Posts are written in my [PARA](https://fortelabs.com/blog/para/) setup, outside this repo.
 
-To bring a post into this repo, run the ingest script from WSL:
+Each post lives in a folder named `YYYY-MM-DD-slug/` and contains `_index.md` plus any images.
 
-```bash
-# Preview what would be copied (no files written)
-npm run ingest:dry
-
-# Ingest all posts not yet present
-npm run ingest
-
-# Ingest a specific post
-npm run ingest -- 2026-05-11-parting-ways-with-code11
-
-# Re-ingest / overwrite an existing post
-npm run ingest -- --force 2026-04-29-parting-ways-with-code11
-npm run ingest -- --force 2026-05-11-hello-world
-```
-
-After ingesting, commit and push to deploy:
+To bring a post into the repo, run the ingest script from WSL:
 
 ```bash
-git add .
-git commit -m "add: parting-ways-with-code11"
-git push
+npm run ingest -- 2026-05-12-a-new-journey
+
+# overwrite an already-ingested post
+npm run ingest -- --force 2026-05-12-a-new-journey
 ```
