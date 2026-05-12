@@ -29,15 +29,6 @@ const base = import.meta.env.BASE_URL;
   <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
     {/* Enhanced header with search - improved responsive spacing */}
     <div class="relative mb-12 sm:mb-20">
-      {/* Decorative elements - adjusted for better mobile appearance */}
-      <div
-        class="animate-blob absolute -top-10 -left-10 h-48 w-48 rounded-full bg-zinc-100 opacity-30 blur-3xl sm:-top-20 sm:-left-20 sm:h-72 sm:w-72 dark:bg-zinc-800/30"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-2000 absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-zinc-200 opacity-30 blur-3xl sm:-right-20 sm:-bottom-20 sm:h-72 sm:w-72 dark:bg-zinc-800/30"
-      >
-      </div>
 
       <div class="relative text-center">
         <h1
@@ -198,30 +189,6 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
-  /* Blob animation */
-  .animate-blob {
-    animation: blob-bounce 8s infinite ease;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  @keyframes blob-bounce {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(5%, 5%) scale(1.05);
-    }
-    50% {
-      transform: translate(0, 10%) scale(1);
-    }
-    75% {
-      transform: translate(-5%, 5%) scale(0.95);
-    }
-  }
 
   /* Search container hover effect */
   .search-container:hover .search-pulse {

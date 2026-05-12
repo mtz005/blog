@@ -53,14 +53,6 @@ const relatedTags = [
   <div class="mx-auto max-w-5xl px-4 py-10 sm:py-16">
     {/* Header section với màu zinc thay vì gray */}
     <div class="relative mb-10 sm:mb-16">
-      <div
-        class="animate-blob absolute -top-20 -left-20 h-48 w-48 rounded-full bg-zinc-100 opacity-30 blur-3xl sm:h-64 sm:w-64 dark:bg-zinc-900/30"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-2000 absolute -right-10 -bottom-10 h-36 w-36 rounded-full bg-zinc-200 opacity-20 blur-2xl sm:h-48 sm:w-48 dark:bg-zinc-900/20"
-      >
-      </div>
 
       <div class="relative text-center sm:text-left">
         <a
@@ -369,29 +361,6 @@ const relatedTags = [
     animation: expand 1s ease-out forwards;
   }
 
-  /* Blob animation */
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      transform: translate(20px, -20px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
-    }
-  }
 
   /* Hover card effect */
   .hover-card {
@@ -424,11 +393,6 @@ const relatedTags = [
   }
 
   /* Responsive adjustments */
-  @media (max-width: 640px) {
-    .animate-blob {
-      animation-duration: 10s;
-    }
-  }
 </style>
 
 <script>

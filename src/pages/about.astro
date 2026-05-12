@@ -63,26 +63,17 @@ const skills = [
 ---
 
 <BaseLayout title="About Me" description="Learn more about my background, skills, and experience">
-  <div class="theme-transition-all mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 md:py-16">
+  <div
+    class="theme-transition-element mx-auto max-w-6xl overflow-hidden px-4 py-8 sm:px-6 sm:py-12 md:py-16"
+  >
     <!-- Hero Section - Improved mobile layout -->
     <div class="relative mb-12 sm:mb-16 md:mb-20">
-      <!-- Decorative elements - adjusted for better mobile appearance -->
-      <div
-        class="animate-blob theme-transition-bg absolute -top-10 -left-10 h-36 w-36 rounded-full bg-zinc-100 opacity-30 blur-3xl sm:-top-20 sm:-left-20 sm:h-48 sm:w-48 md:h-72 md:w-72 dark:bg-zinc-800/30"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-2000 theme-transition-bg absolute -right-10 -bottom-10 h-36 w-36 rounded-full bg-zinc-200 opacity-30 blur-3xl sm:-right-20 sm:-bottom-20 sm:h-48 sm:w-48 md:h-72 md:w-72 dark:bg-zinc-800/30"
-      >
-      </div>
-
       <div class="relative grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
         <div class="order-2 text-center md:order-1 md:text-left">
           <h1
             class="theme-transition-color mb-4 text-3xl font-bold tracking-tight text-zinc-900 sm:mb-6 sm:text-4xl md:text-5xl dark:text-zinc-100"
           >
-            Hello, I'm <span
-              class="theme-transition-all bg-gradient-to-r from-zinc-500 to-zinc-900 bg-clip-text text-transparent dark:from-zinc-300 dark:to-zinc-100"
+            Hello, I'm <span class="theme-transition-color text-zinc-900 dark:text-zinc-100"
               >Braescu Mircea Cristian</span
             >
           </h1>
@@ -103,7 +94,7 @@ const skills = [
 
         <div class="relative order-1 md:order-2">
           <div
-            class="theme-transition-all mx-auto aspect-square w-full max-w-[280px] overflow-hidden rounded-3xl border-4 border-white shadow-xl sm:max-w-[320px] sm:border-8 sm:shadow-2xl md:max-w-md dark:border-zinc-800"
+            class="theme-transition-element mx-auto aspect-square w-full max-w-[280px] overflow-hidden border-6 border-slate-100/60 sm:max-w-[320px] sm:border-8 md:max-w-md dark:border-zinc-800"
           >
             <img
               src="/profile.webp"
@@ -112,19 +103,12 @@ const skills = [
               loading="eager"
             />
           </div>
-
-          <!-- Decorative elements - adjusted for mobile -->
-          <div
-            class="theme-transition-all absolute -right-4 -bottom-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-white bg-zinc-100 shadow-lg sm:-right-6 sm:-bottom-6 sm:h-20 sm:w-20 sm:border-4 md:h-24 md:w-24 dark:border-zinc-900 dark:bg-zinc-800"
-          >
-            <span class="text-2xl sm:text-3xl">👋</span>
-          </div>
         </div>
       </div>
     </div>
 
     <!-- About Section - Improved spacing for mobile -->
-    <div class="theme-transition-all mb-16 sm:mb-20 md:mb-24">
+    <div class="theme-transition-element mb-16 sm:mb-20 md:mb-24">
       <div class="mx-auto max-w-3xl">
         <h2
           class="theme-transition-color mb-6 flex items-center justify-center text-2xl font-bold text-zinc-900 sm:mb-8 sm:text-3xl md:justify-start dark:text-zinc-100"
@@ -138,7 +122,7 @@ const skills = [
           ></span>
         </h2>
 
-        <div class="prose prose-zinc dark:prose-invert theme-transition-all max-w-none">
+        <div class="prose prose-zinc dark:prose-invert theme-transition-element max-w-none">
           <p class="theme-transition-color mb-4 text-base leading-relaxed sm:mb-6 sm:text-lg">
             I'm a Product Manager who grew from Flash developer → UI designer → front-end developer
             → PM through hands-on progression. I spent 5+ years as delivery PM on <a
@@ -159,7 +143,7 @@ const skills = [
     </div>
 
     <!-- Skills Section - Improved for mobile -->
-    <div class="theme-transition-all mb-16 sm:mb-20 md:mb-24">
+    <div class="theme-transition-element mb-16 sm:mb-20 md:mb-24">
       <h2
         class="theme-transition-color mb-8 text-center text-2xl font-bold text-zinc-900 sm:mb-12 sm:text-3xl dark:text-zinc-100"
       >
@@ -179,13 +163,13 @@ const skills = [
                     <h3 class="theme-transition-color truncate text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                       {skill.name}
                     </h3>
-                    <span class="theme-transition-all shrink-0 font-mono text-xs text-zinc-500 dark:text-zinc-400">
+                    <span class="theme-transition-color shrink-0 font-mono text-xs text-zinc-500 dark:text-zinc-400">
                       {skill.level}%
                     </span>
                   </div>
                   <div class="theme-transition-bg relative h-1.5 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-700">
                     <div
-                      class="progress-bar-animate theme-transition-bg absolute top-0 left-0 h-full rounded-full bg-gradient-to-r from-zinc-700 via-zinc-600 to-zinc-800 dark:from-zinc-300 dark:via-zinc-400 dark:to-zinc-200"
+                      class="progress-bar-animate theme-transition-bg absolute top-0 left-0 h-full rounded-full bg-zinc-900 dark:bg-zinc-100"
                       style={`width: ${skill.level}%`}
                     />
                   </div>
@@ -198,7 +182,7 @@ const skills = [
     </div>
 
     <!-- Contact Section - Improved for mobile -->
-    <div class="theme-transition-all mx-auto max-w-3xl text-center">
+    <div class="theme-transition-element mx-auto max-w-3xl text-center">
       <h2
         class="theme-transition-color mb-4 text-2xl font-bold text-zinc-900 sm:mb-6 sm:text-3xl dark:text-zinc-100"
       >
@@ -213,7 +197,7 @@ const skills = [
 
       <a
         href="mailto:mtz@outlook.com"
-        class="theme-transition-all inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition-colors hover:bg-zinc-700 sm:px-8 sm:py-4 sm:text-lg dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+        class="theme-transition-element inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition-colors hover:bg-zinc-700 sm:px-8 sm:py-4 sm:text-lg dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -236,31 +220,6 @@ const skills = [
 </BaseLayout>
 
 <style>
-  /* Blob animation */
-  .animate-blob {
-    animation: blob-bounce 8s infinite ease;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  @keyframes blob-bounce {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(5%, 5%) scale(1.05);
-    }
-    50% {
-      transform: translate(0, 10%) scale(1);
-    }
-    75% {
-      transform: translate(-5%, 5%) scale(0.95);
-    }
-  }
-
   .skill-card {
     transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
@@ -282,52 +241,6 @@ const skills = [
     .skill-card:hover {
       transform: translateY(-5px) !important;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-    }
-  }
-
-  .skill-card:before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0) 70%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-  }
-
-  .skill-card:hover:before {
-    opacity: 1;
-  }
-
-  .progress-bar-animate {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .progress-bar-animate:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: progress-shine 2s infinite;
-  }
-
-  @keyframes progress-shine {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
     }
   }
 

@@ -29,18 +29,6 @@ const base = import.meta.env.BASE_URL;
   <div class="theme-transition-all mx-auto w-full px-3 py-6 sm:px-6 sm:py-12 md:py-16">
     {/* Enhanced header section with animated elements - improved for mobile */}
     <div class="theme-transition-element relative mb-8 text-center sm:mb-12 md:mb-16">
-      <div
-        class="animate-blob theme-transition-bg absolute -top-16 -left-16 h-36 w-36 rounded-full bg-zinc-100 opacity-50 blur-3xl sm:h-48 sm:w-48 md:h-72 md:w-72 dark:bg-zinc-800/50"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-2000 theme-transition-bg absolute -right-16 -bottom-16 h-36 w-36 rounded-full bg-zinc-200 opacity-30 blur-3xl sm:h-48 sm:w-48 md:h-72 md:w-72 dark:bg-zinc-800/30"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-4000 theme-transition-bg absolute top-8 right-8 h-24 w-24 rounded-full bg-zinc-100/30 opacity-40 blur-2xl sm:h-32 sm:w-32 md:h-40 md:w-40 dark:bg-zinc-700/20"
-      >
-      </div>
 
       <h1
         class="theme-transition-color relative mb-3 text-3xl font-bold tracking-tight text-zinc-900 sm:mb-4 sm:text-4xl md:mb-6 md:text-5xl lg:text-6xl dark:text-zinc-100"
@@ -313,34 +301,6 @@ const base = import.meta.env.BASE_URL;
       opacity 0.15s ease-in-out !important;
   }
 
-  /* Animation for blob */
-  @keyframes blob {
-    0%,
-    100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(10px, -10px) scale(1.05);
-    }
-    50% {
-      transform: translate(0, 20px) scale(0.95);
-    }
-    75% {
-      transform: translate(-10px, -10px) scale(1.05);
-    }
-  }
-
-  .animate-blob {
-    animation: blob 20s infinite ease-in-out;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
-  }
 
   /* Animation for underline */
   @keyframes underline {

@@ -20,21 +20,6 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
   class="theme-transition-all relative mt-8 overflow-hidden border-t border-zinc-100 dark:border-zinc-800"
   style="content-visibility: auto; contain-intrinsic-size: auto 400px;"
 >
-  <!-- Enhanced decorative elements with animation -->
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div
-      class="theme-transition-all animate-float-slow absolute -top-40 -right-40 h-80 w-80 rounded-full bg-zinc-100 opacity-50 blur-3xl dark:bg-zinc-800/30"
-    >
-    </div>
-    <div
-      class="theme-transition-all animate-float-slow animation-delay-2000 absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-zinc-100 opacity-50 blur-3xl dark:bg-zinc-800/30"
-    >
-    </div>
-    <div
-      class="theme-transition-all animate-float-slow animation-delay-1000 absolute top-20 left-1/4 h-40 w-40 rounded-full bg-zinc-200/50 opacity-30 blur-2xl dark:bg-zinc-700/20"
-    >
-    </div>
-  </div>
 
   <div class="relative px-4 pt-8 pb-8 sm:px-6">
     <div class="mx-auto max-w-4xl">
@@ -532,36 +517,8 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
     }
   }
 
-  @keyframes float-slow {
-    0%,
-    100% {
-      transform: translateY(0) translateX(0);
-    }
-    25% {
-      transform: translateY(-10px) translateX(10px);
-    }
-    50% {
-      transform: translateY(-5px) translateX(-5px);
-    }
-    75% {
-      transform: translateY(10px) translateX(5px);
-    }
-  }
-
   .animate-pulse {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-float-slow {
-    animation: float-slow 20s ease-in-out infinite;
-  }
-
-  .animation-delay-1000 {
-    animation-delay: 1s;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
   }
 
   /* Spotify player enhancements */
@@ -700,7 +657,6 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
 
   @media (prefers-reduced-motion: reduce) {
     .animate-pulse,
-    .animate-float-slow,
     .pulse-dot::after,
     .spinner,
     .marquee-active .marquee-wrapper {

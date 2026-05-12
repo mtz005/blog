@@ -24,15 +24,6 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
   {/* Hero Section with improved mobile responsiveness */}
   <section class="theme-transition-all px-4 py-10 sm:px-6 sm:py-16 md:py-20">
     <div class="relative mx-auto max-w-2xl">
-      {/* Adjusted blob positions and sizes for better mobile appearance */}
-      <div
-        class="animate-blob theme-transition-bg absolute -top-10 -left-10 h-40 w-40 rounded-full bg-zinc-100 opacity-50 blur-3xl sm:-top-20 sm:-left-20 sm:h-64 sm:w-64 dark:bg-zinc-800/50"
-      >
-      </div>
-      <div
-        class="animate-blob animation-delay-2000 theme-transition-bg absolute -right-10 -bottom-10 h-40 w-40 rounded-full bg-zinc-200 opacity-30 blur-3xl sm:-right-20 sm:-bottom-20 sm:h-64 sm:w-64 dark:bg-zinc-800/30"
-      >
-      </div>
 
       <div class="relative text-center sm:text-left">
         <h1
