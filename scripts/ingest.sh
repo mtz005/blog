@@ -116,7 +116,7 @@ if [[ ${#FOLDERS[@]} -eq 0 ]]; then
   exit 0
 fi
 
-[[ "${DRY_RUN}" == true ]] && log "(dry-run mode — no files will be written)"
+[[ "${DRY_RUN}" == true ]] && log "(dry-run mode - no files will be written)"
 echo ""
 
 # ---------------------------------------------------------------------------
@@ -134,7 +134,7 @@ for folder in "${FOLDERS[@]}"; do
 
   # Check source markdown exists
   if [[ ! -f "${src_md}" ]]; then
-    warn "${folder}: _index.md not found — skipping."
+    warn "${folder}: _index.md not found - skipping."
     (( ERRORS++ )) || true
     continue
   fi
@@ -193,5 +193,5 @@ done
 # Summary
 # ---------------------------------------------------------------------------
 echo "Done. Ingested: ${INGESTED}  Skipped: ${SKIPPED}  Errors: ${ERRORS}"
-[[ "${DRY_RUN}" == true ]] && echo "(dry-run — no files were written)"
+[[ "${DRY_RUN}" == true ]] && echo "(dry-run - no files were written)"
 [[ "${ERRORS}" -gt 0 ]] && exit 1 || exit 0

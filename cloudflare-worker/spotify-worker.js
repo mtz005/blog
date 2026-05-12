@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker — Spotify Now Playing proxy
+ * Cloudflare Worker - Spotify Now Playing proxy
  *
  * Deploy at: https://dash.cloudflare.com → Workers & Pages → Create Worker
  * Paste this file, then add secrets in Settings → Variables & Secrets:
@@ -37,7 +37,7 @@ async function getAccessToken(env) {
   if (!response.ok) {
     const body = await response.text();
     console.error(`Token fetch failed: ${response.status}`, body);
-    throw new Error(`Token fetch failed: ${response.status} — ${body}`);
+    throw new Error(`Token fetch failed: ${response.status} - ${body}`);
   }
 
   const data = await response.json();
@@ -49,7 +49,7 @@ async function getAccessToken(env) {
 
 export default {
   async fetch(request, env) {
-    // CORS headers — restrict to your blog's domain in production
+    // CORS headers - restrict to your blog's domain in production
     const allowedOrigins = [
       "https://mtz005.github.io",
       "https://mirkea.com",

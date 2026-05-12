@@ -14,6 +14,7 @@ article.article-entering {
     opacity: 0;
     transform: translateY(1.25rem);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -126,15 +127,17 @@ article .heading-visible {
 .markdown-content ul {
   @apply list-disc;
 }
+
 .markdown-content ol {
   @apply list-decimal;
 }
 
-.markdown-content li + li {
-  @apply mt-2;
+.markdown-content li+li {
+  @apply mt-0;
 }
-.markdown-content li > ul,
-.markdown-content li > ol {
+
+.markdown-content li>ul,
+.markdown-content li>ol {
   @apply my-1;
 }
 
@@ -314,6 +317,7 @@ article .heading-visible {
 .markdown-content .footnotes ol {
   @apply pl-4;
 }
+
 .markdown-content .footnotes li {
   @apply mb-2;
 }
@@ -350,6 +354,7 @@ article .heading-visible {
   border-left-color: var(--color-callout-warning);
   background-color: color-mix(in oklch, var(--color-callout-warning) 10%, transparent);
 }
+
 .dark .markdown-content .callout.warning {
   background-color: color-mix(in oklch, var(--color-callout-warning) 5%, transparent);
 }
@@ -358,6 +363,7 @@ article .heading-visible {
   border-left-color: var(--color-callout-danger);
   background-color: color-mix(in oklch, var(--color-callout-danger) 10%, transparent);
 }
+
 .dark .markdown-content .callout.danger {
   background-color: color-mix(in oklch, var(--color-callout-danger) 5%, transparent);
 }
@@ -366,6 +372,7 @@ article .heading-visible {
   border-left-color: var(--color-callout-tip);
   background-color: color-mix(in oklch, var(--color-callout-tip) 10%, transparent);
 }
+
 .dark .markdown-content .callout.tip {
   background-color: color-mix(in oklch, var(--color-callout-tip) 5%, transparent);
 }
@@ -433,6 +440,7 @@ article .heading-visible {
 .markdown-content .token.italic {
   @apply italic;
 }
+
 .markdown-content .token.entity {
   @apply cursor-help;
 }
@@ -442,21 +450,27 @@ article .heading-visible {
   .markdown-content h1 {
     @apply text-4xl;
   }
+
   .markdown-content h2 {
     @apply text-2xl;
   }
+
   .markdown-content h3 {
     @apply text-xl;
   }
+
   .markdown-content pre {
     @apply p-3;
   }
+
   .markdown-content pre.with-line-numbers {
     @apply pl-12;
   }
+
   .markdown-content .line-numbers {
     @apply w-8;
   }
+
   .markdown-content blockquote {
     @apply px-4 py-3;
   }
@@ -467,28 +481,34 @@ article .heading-visible {
   .markdown-content {
     font-size: 12pt;
   }
+
   .markdown-content pre,
   .markdown-content code {
     font-size: 10pt;
   }
+
   .markdown-content a {
     color: #000 !important;
     text-decoration: underline;
   }
+
   .markdown-content blockquote {
     border-left: 2pt solid #000;
     padding: 0.5cm 1cm;
     background: none !important;
   }
+
   .markdown-content img {
     max-width: 100% !important;
     page-break-inside: avoid;
   }
+
   .markdown-content h2,
   .markdown-content h3,
   .markdown-content h4 {
     page-break-after: avoid;
   }
+
   .markdown-content p,
   .markdown-content h2,
   .markdown-content h3 {
@@ -552,6 +572,7 @@ article .heading-visible {
 .markdown-content sup {
   @apply -top-[0.5em];
 }
+
 .markdown-content sub {
   @apply -bottom-[0.25em];
 }
@@ -560,6 +581,7 @@ article .heading-visible {
 .markdown-content .mermaid {
   @apply my-6 text-center;
 }
+
 .markdown-content .math {
   @apply my-6 overflow-x-auto;
 }

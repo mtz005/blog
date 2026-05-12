@@ -19,16 +19,25 @@
     --theme-transition-timing: ease;
     --theme-transition: var(--theme-transition-duration) var(--theme-transition-timing);
 
-    /* ─── Semantic colour tokens — light mode ────────────────────── */
-    --color-bg: 255 255 255; /* white   */
-    --color-bg-surface: 244 244 245; /* zinc-100 */
-    --color-bg-elevated: 250 250 250; /* zinc-50  */
-    --color-border: 228 228 231; /* zinc-200 */
-    --color-text: 24 24 27; /* zinc-900 */
-    --color-text-muted: 113 113 122; /* zinc-500 */
-    --color-text-subtle: 161 161 170; /* zinc-400 */
-    --color-primary: 24 24 27; /* zinc-900 — main accent / underlines */
-    --color-primary-fg: 255 255 255; /* white    — text on primary bg       */
+    /* ─── Semantic colour tokens - light mode ────────────────────── */
+    --color-bg: 255 255 255;
+    /* white   */
+    --color-bg-surface: 244 244 245;
+    /* zinc-100 */
+    --color-bg-elevated: 250 250 250;
+    /* zinc-50  */
+    --color-border: 228 228 231;
+    /* zinc-200 */
+    --color-text: 24 24 27;
+    /* zinc-900 */
+    --color-text-muted: 113 113 122;
+    /* zinc-500 */
+    --color-text-subtle: 161 161 170;
+    /* zinc-400 */
+    --color-primary: 24 24 27;
+    /* zinc-900 - main accent / underlines */
+    --color-primary-fg: 255 255 255;
+    /* white    - text on primary bg       */
 
     /* ─── Code block colours (always dark-surface) ───────────────── */
     --color-code-block-bg: var(--color-slate-800);
@@ -72,15 +81,24 @@
 
   /* ─── Dark-mode overrides ──────────────────────────────────────── */
   :root.dark {
-    --color-bg: 24 24 27; /* zinc-900 */
-    --color-bg-surface: 39 39 42; /* zinc-800 */
-    --color-bg-elevated: 63 63 70; /* zinc-700 */
-    --color-border: 63 63 70; /* zinc-700 */
-    --color-text: 244 244 245; /* zinc-100 */
-    --color-text-muted: 161 161 170; /* zinc-400 */
-    --color-text-subtle: 113 113 122; /* zinc-500 */
-    --color-primary: 244 244 245; /* zinc-100 */
-    --color-primary-fg: 24 24 27; /* zinc-900 */
+    --color-bg: 24 24 27;
+    /* zinc-900 */
+    --color-bg-surface: 39 39 42;
+    /* zinc-800 */
+    --color-bg-elevated: 63 63 70;
+    /* zinc-700 */
+    --color-border: 63 63 70;
+    /* zinc-700 */
+    --color-text: 244 244 245;
+    /* zinc-100 */
+    --color-text-muted: 161 161 170;
+    /* zinc-400 */
+    --color-text-subtle: 113 113 122;
+    /* zinc-500 */
+    --color-primary: 244 244 245;
+    /* zinc-100 */
+    --color-primary-fg: 24 24 27;
+    /* zinc-900 */
 
     /* ─── Blockquote border (dark) ───────────────────────────────── */
     --color-blockquote-border: var(--color-blue-400);
@@ -144,11 +162,11 @@
  * Apply these classes to any element that should animate smoothly when the
  * user switches between light and dark mode.
  *
- *  .theme-transition-all    — transitions every animatable property
- *  .theme-transition-bg     — transitions background-color only
- *  .theme-transition-color  — transitions color only
- *  .theme-transition-border — transitions border-color only
- *  .theme-transition-element — bg + color + border combined (common pattern)
+ *  .theme-transition-all    - transitions every animatable property
+ *  .theme-transition-bg     - transitions background-color only
+ *  .theme-transition-color  - transitions color only
+ *  .theme-transition-border - transitions border-color only
+ *  .theme-transition-element - bg + color + border combined (common pattern)
  */
 .theme-transition-all {
   transition: all var(--theme-transition);
@@ -232,6 +250,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -242,6 +261,7 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -253,6 +273,7 @@
     transform: translateY(-20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -264,6 +285,7 @@
     transform: scale(0.95);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -304,7 +326,7 @@
   animation-delay: 0.4s;
 }
 
-/* Hover transitions — specific properties only, never transition:all */
+/* Hover transitions - specific properties only, never transition:all */
 a,
 button {
   transition:

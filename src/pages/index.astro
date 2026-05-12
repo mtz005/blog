@@ -132,7 +132,9 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
               description={post.data.description}
               pubDate={post.data.pubDate}
               slug={post.slug}
-              readingTime={post.data.readingTime || `${Math.ceil(post.body.length / 2000)} min read`}
+              readingTime={
+                post.data.readingTime || `${Math.ceil(post.body.length / 2000)} min read`
+              }
               tags={post.data.tags}
               heroImage={post.data.image}
               index={index}
@@ -427,7 +429,7 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
     animation: reveal-up 0.6s ease both 0.5s;
   }
 
-  /* Post cards — stagger up to 3 */
+  /* Post cards - stagger up to 3 */
   article.group:nth-child(1) {
     animation: reveal-up 0.6s ease both 0.5s;
   }
@@ -438,7 +440,7 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags || []))].s
     animation: reveal-up 0.6s ease both 0.8s;
   }
 
-  /* Topic cards — stagger up to 6 */
+  /* Topic cards - stagger up to 6 */
   a.group.flex.flex-col:nth-child(1) {
     animation: reveal-up 0.6s ease both 0.8s;
   }

@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker — Cusdis comment notification webhook
+ * Cloudflare Worker - Cusdis comment notification webhook
  *
  * Deploy via wrangler (from cloudflare-worker/cusdis-webhook/):
  *   npx wrangler deploy

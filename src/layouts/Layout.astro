@@ -29,7 +29,10 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
     <script is:inline>
       (function () {
         var theme = localStorage.getItem("theme");
-        if (theme === "dark" || (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        if (
+          theme === "dark" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
           document.documentElement.classList.add("dark");
         } else {
           document.documentElement.classList.remove("dark");
@@ -184,12 +187,17 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
                 const tryObserve = () => {
                   try {
                     const body = (iframe.contentDocument as Document)?.body;
-                    if (!body) { setTimeout(tryObserve, 100); return; }
+                    if (!body) {
+                      setTimeout(tryObserve, 100);
+                      return;
+                    }
                     new ResizeObserver(() => {
                       const h = (iframe.contentDocument as Document).body.scrollHeight;
                       if (h > 0) iframe.style.height = h + "px";
                     }).observe(body);
-                  } catch { setTimeout(tryObserve, 200); }
+                  } catch {
+                    setTimeout(tryObserve, 200);
+                  }
                 };
                 iframe.addEventListener("load", tryObserve);
                 tryObserve();
@@ -221,12 +229,18 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
               if ((window as any).CUSDIS) {
                 (window as any).CUSDIS.renderTo(cusdisThread);
               } else {
-                // Script was just dynamically injected — wait for it to load then render
-                const cusdisScript = mainContent.querySelector('script[src*="cusdis.es.js"]') as HTMLScriptElement | null;
+                // Script was just dynamically injected - wait for it to load then render
+                const cusdisScript = mainContent.querySelector(
+                  'script[src*="cusdis.es.js"]',
+                ) as HTMLScriptElement | null;
                 if (cusdisScript) {
-                  cusdisScript.addEventListener('load', () => {
-                    (window as any).CUSDIS?.renderTo(cusdisThread);
-                  }, { once: true });
+                  cusdisScript.addEventListener(
+                    "load",
+                    () => {
+                      (window as any).CUSDIS?.renderTo(cusdisThread);
+                    },
+                    { once: true },
+                  );
                 }
               }
             }
@@ -304,7 +318,6 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
             loadContent(window.location.href);
           }
         });
-
       });
 
       // Theme handling with transition effects
@@ -339,7 +352,7 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
 </html>
 
 <style is:global>
-  /* Logo draw-in animation — global so it applies to set:html and markdown embeds */
+  /* Logo draw-in animation - global so it applies to set:html and markdown embeds */
   /* Order: m-right → i (stem + dot) → m-left */
   .logo-anim [data-animate="m-right"] {
     stroke-dasharray: 1;
@@ -408,38 +421,81 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
 
   /* m-right: in 0→0.45s (0-13%), out 2.56→3.0s (73-86%) */
   @keyframes draw-loop-m-right {
-    0%   { stroke-dashoffset: 1; }
-    13%  { stroke-dashoffset: 0; }
-    73%  { stroke-dashoffset: 0; }
-    86%  { stroke-dashoffset: 1; }
-    100% { stroke-dashoffset: 1; }
+    0% {
+      stroke-dashoffset: 1;
+    }
+    13% {
+      stroke-dashoffset: 0;
+    }
+    73% {
+      stroke-dashoffset: 0;
+    }
+    86% {
+      stroke-dashoffset: 1;
+    }
+    100% {
+      stroke-dashoffset: 1;
+    }
   }
 
   /* i-stem: in 0.39→0.70s (11-20%), out 2.38→2.66s (68-76%) */
   @keyframes draw-loop-i-stem {
-    0%, 11% { stroke-dashoffset: 1; }
-    20%     { stroke-dashoffset: 0; }
-    68%     { stroke-dashoffset: 0; }
-    76%     { stroke-dashoffset: 1; }
-    100%    { stroke-dashoffset: 1; }
+    0%,
+    11% {
+      stroke-dashoffset: 1;
+    }
+    20% {
+      stroke-dashoffset: 0;
+    }
+    68% {
+      stroke-dashoffset: 0;
+    }
+    76% {
+      stroke-dashoffset: 1;
+    }
+    100% {
+      stroke-dashoffset: 1;
+    }
   }
 
   /* m-left: in 0.75→1.2s (21-34%), out 1.96→2.38s (56-68%) */
   @keyframes draw-loop-m-left {
-    0%, 21% { stroke-dashoffset: 1; }
-    34%     { stroke-dashoffset: 0; }
-    56%     { stroke-dashoffset: 0; }
-    68%     { stroke-dashoffset: 1; }
-    100%    { stroke-dashoffset: 1; }
+    0%,
+    21% {
+      stroke-dashoffset: 1;
+    }
+    34% {
+      stroke-dashoffset: 0;
+    }
+    56% {
+      stroke-dashoffset: 0;
+    }
+    68% {
+      stroke-dashoffset: 1;
+    }
+    100% {
+      stroke-dashoffset: 1;
+    }
   }
 
   /* i-dot: appear 0.63→0.84s (18-24%), disappear 2.24→2.45s (64-70%) */
   @keyframes dot-loop {
-    0%, 18% { opacity: 0; }
-    24%     { opacity: 1; }
-    64%     { opacity: 1; }
-    70%     { opacity: 0; }
-    100%    { opacity: 0; }
+    0%,
+    18% {
+      opacity: 0;
+    }
+    24% {
+      opacity: 1;
+    }
+    64% {
+      opacity: 1;
+    }
+    70% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
   }
 </style>
 
