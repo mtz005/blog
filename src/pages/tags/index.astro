@@ -107,28 +107,28 @@ const base = import.meta.env.BASE_URL;
               Popular Topics
             </h2>
 
-            {/* Ultra-responsive grid layout with fallbacks */}
-            <div class="xxxs:grid-cols-2 xxs:grid-cols-2 xs:grid-cols-3 xxxs:gap-2 xxs:gap-2 xs:gap-2 grid w-full grid-cols-2 gap-1.5 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
+            <div class="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
               {sortedTags.map((tag) => (
                 <a
                   href={`${base}tags/${tag.name}`}
-                  class="group theme-transition-element theme-ripple relative min-w-0 flex-grow overflow-hidden rounded-md border border-zinc-200 transition-all duration-300 hover:scale-[1.03] hover:border-zinc-300 hover:shadow-md active:scale-95 sm:rounded-lg sm:hover:shadow-lg md:rounded-md dark:border-zinc-800 dark:hover:border-zinc-700"
+                  class="group theme-transition-element theme-ripple relative min-w-0 overflow-hidden rounded-xl border border-zinc-200 transition-all duration-300 hover:scale-[1.03] hover:border-zinc-300 hover:shadow-md active:scale-95 dark:border-zinc-800 dark:hover:border-zinc-700"
                   style={`--tag-hue: ${tag.hue};`}
                 >
-                  <div class="theme-transition-bg absolute inset-0 bg-gradient-to-br from-zinc-50/90 to-zinc-100/90 opacity-100 transition-opacity group-hover:opacity-95 dark:from-zinc-800/90 dark:to-zinc-900/90" />
+                  <div class="theme-transition-bg absolute inset-0 bg-gradient-to-br from-zinc-50/90 to-zinc-100/90 transition-opacity group-hover:opacity-95 dark:from-zinc-800/90 dark:to-zinc-900/90" />
 
-                  <div class="xxxs:px-2 xxs:px-2 xs:px-2 xxxs:py-2 xxs:py-2 xs:py-2 xxs:gap-2 relative flex w-full items-center gap-1.5 px-1.5 py-1.5 sm:px-3 sm:py-3 md:px-4 md:py-4">
-                    <div class="xxxs:w-6 xxxs:h-6 xxs:w-6 xxs:h-6 xs:w-7 xs:h-7 group-hover:bg-accent/20 dark:group-hover:bg-accent/20 group-hover:text-accent-dark dark:group-hover:text-accent-light theme-transition-all flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-700 shadow-sm transition-all duration-300 sm:h-8 sm:w-8 md:h-10 md:w-10 dark:bg-zinc-800 dark:text-zinc-300">
-                      <span class="xxxs:text-xs xxs:text-xs xs:text-sm text-xs font-semibold sm:text-base md:text-lg">
-                        #
-                      </span>
+                  <div class="relative flex w-full items-center gap-3 px-3 py-3 sm:px-4 sm:py-4">
+                    <div class="theme-transition-all flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-700 shadow-sm transition-all duration-300 sm:h-9 sm:w-9 dark:bg-zinc-800 dark:text-zinc-300">
+                      <span class="text-sm font-semibold sm:text-base">#</span>
                     </div>
 
-                    <div class="min-w-0 flex-1 overflow-hidden">
-                      <h3 class="xxxs:text-xs xxs:text-xs xs:text-xs theme-transition-color truncate text-[10px] font-bold break-words hyphens-auto text-zinc-900 transition-colors group-hover:text-zinc-700 sm:text-sm md:text-base dark:text-zinc-100 dark:group-hover:text-zinc-300">
+                    <div class="min-w-0 flex-1">
+                      <h3
+                        class="theme-transition-color truncate text-sm font-bold text-zinc-900 transition-colors group-hover:text-zinc-700 dark:text-zinc-100 dark:group-hover:text-zinc-300"
+                        title={tag.name}
+                      >
                         {tag.name}
                       </h3>
-                      <p class="xxxs:text-[9px] xxs:text-[9px] xs:text-[10px] theme-transition-color truncate text-[8px] text-zinc-500 sm:text-xs md:text-xs dark:text-zinc-400">
+                      <p class="theme-transition-color text-xs text-zinc-500 dark:text-zinc-400">
                         {tag.count} article{tag.count !== 1 ? "s" : ""}
                       </p>
                     </div>
@@ -171,108 +171,8 @@ const base = import.meta.env.BASE_URL;
 
     fixViewportWidth();
 
-    // Adjust tag items based on screen size with extreme precision
-    const adjustTagItems = () => {
-      const tagItems = document.querySelectorAll(".theme-ripple");
-      const width =
-        window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-      const isVerySmall = width < 360;
-      const isExtremelySmall = width < 280;
-      const isMicroScreen = width < 240;
-
-      // Fix container width to match viewport exactly
-      const container = document.querySelector(".tag-cloud");
-      if (container) {
-        container.style.maxWidth = "100vw";
-        container.style.width = "100%";
-        container.style.boxSizing = "border-box";
-
-        // Remove any margins that might cause overflow
-        container.style.marginLeft = "0";
-        container.style.marginRight = "0";
-      }
-
-      // Fix grid width
-      const grid = document.querySelector(".grid");
-      if (grid) {
-        grid.style.width = "100%";
-        grid.style.maxWidth = "100%";
-      }
-
-      tagItems.forEach((item) => {
-        // Set appropriate classes based on screen size
-        if (isMicroScreen) {
-          item.classList.add("micro-screen");
-          item.classList.remove("extremely-small-screen", "very-small-screen");
-        } else if (isExtremelySmall) {
-          item.classList.add("extremely-small-screen");
-          item.classList.remove("very-small-screen", "micro-screen");
-        } else if (isVerySmall) {
-          item.classList.add("very-small-screen");
-          item.classList.remove("extremely-small-screen", "micro-screen");
-        } else {
-          item.classList.remove("very-small-screen", "extremely-small-screen", "micro-screen");
-        }
-
-        // Ensure text doesn't overflow on small screens
-        const tagName = item.querySelector("h3");
-        const tagCount = item.querySelector("p");
-
-        if (tagName) {
-          // Set title for accessibility
-          tagName.title = tagName.textContent.trim();
-
-          // Adjust text length based on screen size
-          if (isMicroScreen && tagName.textContent.length > 6) {
-            tagName.dataset.fullText = tagName.textContent;
-            tagName.textContent = tagName.textContent.substring(0, 6) + "...";
-          } else if (isExtremelySmall && tagName.textContent.length > 8) {
-            tagName.dataset.fullText = tagName.textContent;
-            tagName.textContent = tagName.textContent.substring(0, 8) + "...";
-          } else if (isVerySmall && tagName.textContent.length > 12) {
-            tagName.dataset.fullText = tagName.textContent;
-            tagName.textContent = tagName.textContent.substring(0, 12) + "...";
-          } else if (tagName.dataset.fullText) {
-            tagName.textContent = tagName.dataset.fullText;
-            delete tagName.dataset.fullText;
-          }
-        }
-
-        // Set the tag hue for hover effects
-        const hue = item.style.getPropertyValue("--tag-hue");
-        item.style.setProperty("--hover-hue", hue);
-      });
-    };
-
-    // Run on load
-    adjustTagItems();
-
-    // Run on resize with optimized debounce
-    let resizeTimer;
-    const handleResize = () => {
-      if (resizeTimer) {
-        window.cancelAnimationFrame(resizeTimer);
-      }
-
-      resizeTimer = window.requestAnimationFrame(() => {
-        fixViewportWidth();
-        adjustTagItems();
-      });
-    };
-
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-
-    // Ensure layout is recalculated after page is fully loaded
-    window.addEventListener("load", () => {
-      fixViewportWidth();
-      adjustTagItems();
-      // Force recalculation after images and fonts are loaded
-      setTimeout(() => {
-        fixViewportWidth();
-        adjustTagItems();
-      }, 500);
-    });
+    window.addEventListener("resize", fixViewportWidth);
+    window.addEventListener("load", fixViewportWidth);
 
     // Fix for iOS Safari and other mobile browsers
     if (/iPhone|iPad|iPod|Android/.test(navigator.userAgent)) {
@@ -349,10 +249,6 @@ const base = import.meta.env.BASE_URL;
 <style>
   /* Base styles */
   .tag-cloud {
-    box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.03),
-      0 2px 4px rgba(0, 0, 0, 0.03),
-      0 4px 8px rgba(0, 0, 0, 0.05);
     transform-style: preserve-3d;
     perspective: 1000px;
     transition: all var(--theme-transition);
@@ -376,155 +272,6 @@ const base = import.meta.env.BASE_URL;
     width: 100% !important;
   }
 
-  /* Ultra-responsive breakpoints for extreme reliability */
-  /* Micro screens (below 240px) */
-  @media (max-width: 239px) {
-    .tag-cloud {
-      padding: 0.5rem !important;
-      margin: 0 !important;
-      border-radius: 0.25rem !important;
-      width: 100% !important;
-    }
-
-    .tag-cloud h2 {
-      font-size: 0.875rem !important;
-      margin-bottom: 0.375rem !important;
-    }
-
-    .grid {
-      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-      gap: 0.375rem !important;
-      width: 100% !important;
-    }
-
-    .micro-screen .flex {
-      padding: 0.25rem !important;
-    }
-
-    .micro-screen h3 {
-      font-size: 0.625rem !important;
-    }
-
-    .micro-screen p {
-      font-size: 0.5rem !important;
-    }
-  }
-
-  /* Extra extra extra small screens (240px-279px) */
-  @media (min-width: 240px) and (max-width: 279px) {
-    .xxxs\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .xxxs\:px-2 {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-
-    .xxxs\:py-2 {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .xxxs\:w-6 {
-      width: 1.5rem;
-    }
-
-    .xxxs\:h-6 {
-      height: 1.5rem;
-    }
-
-    .xxxs\:text-xs {
-      font-size: 0.75rem;
-    }
-
-    .xxxs\:gap-2 {
-      gap: 0.5rem;
-    }
-
-    .xxxs\:text-\[9px\] {
-      font-size: 9px;
-    }
-  }
-
-  /* Extra extra small screens (280px-359px) */
-  @media (min-width: 280px) {
-    .xxs\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .xxs\:px-2 {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-
-    .xxs\:py-2 {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .xxs\:w-6 {
-      width: 1.5rem;
-    }
-
-    .xxs\:h-6 {
-      height: 1.5rem;
-    }
-
-    .xxs\:text-xs {
-      font-size: 0.75rem;
-    }
-
-    .xxs\:gap-2 {
-      gap: 0.5rem;
-    }
-
-    .xxs\:text-\[9px\] {
-      font-size: 9px;
-    }
-  }
-
-  /* Extra small screens (360px-639px) */
-  @media (min-width: 360px) {
-    .xs\:grid-cols-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .xs\:px-2 {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
-    }
-
-    .xs\:py-2 {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .xs\:w-7 {
-      width: 1.75rem;
-    }
-
-    .xs\:h-7 {
-      height: 1.75rem;
-    }
-
-    .xs\:text-xs {
-      font-size: 0.75rem;
-    }
-
-    .xs\:text-sm {
-      font-size: 0.875rem;
-    }
-
-    .xs\:gap-2 {
-      gap: 0.5rem;
-    }
-
-    .xs\:text-\[10px\] {
-      font-size: 10px;
-    }
-  }
-
   /* Ensure text doesn't overflow on small screens */
   .truncate {
     overflow: hidden;
@@ -541,14 +288,6 @@ const base = import.meta.env.BASE_URL;
 
   .hyphens-auto {
     hyphens: auto;
-  }
-
-  /* Improved shadow for dark mode */
-  :global(.dark) .tag-cloud {
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 2px 4px rgba(0, 0, 0, 0.1),
-      0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   /* Prevent layout shifts */
