@@ -37,7 +37,7 @@ The entire process took less than one day and went very smoothly. The only bump 
 
 Best of all, this was the perfect excuse to make a quick logo for myself.
 
-<div style="display:flex;justify-content:center;padding:2rem 0; background:rgba(128,128,128,0.1)">
+<div style="display:flex;justify-content:center;padding:2rem 0; background:rgba(128,128,128,0.1); border-radius:8px;">
 <svg class="logo-anim-loop" width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <mask id="logo-post-mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="4" y="7" width="56" height="43">
 <rect width="55.812" height="41.1258" transform="matrix(1 0 0 -1 4.11429 49.0373)" fill="white"/>

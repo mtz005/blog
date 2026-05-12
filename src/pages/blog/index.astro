@@ -26,10 +26,9 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Blog">
-  <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-16">
+  <div class="mx-auto w-full max-w-6xl px-4 pt-10 sm:px-6 sm:pt-12">
     {/* Enhanced header with search - improved responsive spacing */}
     <div class="relative mb-12 sm:mb-20">
-
       <div class="relative text-center">
         <h1
           class="mb-4 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl md:text-5xl dark:text-zinc-100"
@@ -82,7 +81,7 @@ const base = import.meta.env.BASE_URL;
                   <h2 class="mb-3 text-center text-2xl font-bold text-zinc-900 transition-colors group-hover:text-zinc-700 sm:mb-4 sm:text-3xl md:text-left dark:text-zinc-100 dark:group-hover:text-zinc-300">
                     <a
                       href={`${base}${sortedPosts[0].slug}`}
-                      class="before:absolute before:inset-0"
+                      class="justify-center before:absolute before:inset-0"
                     >
                       {sortedPosts[0].data.title}
                     </a>
@@ -134,7 +133,7 @@ const base = import.meta.env.BASE_URL;
 
           {/* Horizontal scrollable archive on mobile, vertical on desktop */}
           <div
-            class="hide-scrollbar flex overflow-x-auto pb-4 md:flex-col md:overflow-visible md:pb-0"
+            class="hide-scrollbar justi flex justify-center overflow-x-auto pb-4 md:flex-col md:overflow-visible md:pb-0"
           >
             {
               years.map((year, index) => (
@@ -189,6 +188,30 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
+  /* Blob animation */
+  .animate-blob {
+    animation: blob-bounce 8s infinite ease;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  @keyframes blob-bounce {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(5%, 5%) scale(1.05);
+    }
+    50% {
+      transform: translate(0, 10%) scale(1);
+    }
+    75% {
+      transform: translate(-5%, 5%) scale(0.95);
+    }
+  }
 
   /* Search container hover effect */
   .search-container:hover .search-pulse {
