@@ -1,0 +1,133 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+
+export interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  slug: string;
+  readingTime?: string;
+  tags?: string[];
+  heroImage?: string;
+  index?: number;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  slug,
+  readingTime,
+  tags = [],
+  heroImage,
+  index = 0,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const estimatedReadingTime = readingTime ?? "5 min read";
+---
+
+<article
+  class="group hover-3d theme-transition-element relative mx-auto flex w-full max-w-sm flex-col items-start sm:mx-0"
+>
+  <div
+    class="theme-transition-bg absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 sm:-inset-x-6 sm:rounded-2xl dark:bg-zinc-800/50"
+  >
+  </div>
+
+  {
+    heroImage && (
+      <div class="relative z-10 mb-4 aspect-video w-full overflow-hidden rounded-lg">
+        <img
+          src={heroImage}
+          alt={title}
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading={index === 0 ? "eager" : "lazy"}
+          width="400"
+          height="225"
+        />
+      </div>
+    )
+  }
+
+  <div
+    class="theme-transition-color relative z-10 flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 text-xs text-zinc-500 sm:justify-start sm:gap-x-4 dark:text-zinc-400"
+  >
+    <time datetime={pubDate.toISOString()} class="font-medium">
+      <FormattedDate date={pubDate} format="long" />
+    </time>
+    <span
+      class="theme-transition-all relative z-10 rounded-full border border-zinc-300 px-2 py-1 font-medium text-zinc-500 sm:px-3 sm:py-1.5 dark:border-zinc-600 dark:text-zinc-400"
+    >
+      {estimatedReadingTime}
+    </span>
+  </div>
+
+  <h3
+    class="theme-transition-color relative z-10 mt-3 w-full text-center text-lg font-semibold tracking-tight text-zinc-900 transition-colors group-hover:text-zinc-700 sm:text-left sm:text-xl dark:text-zinc-100 dark:group-hover:text-zinc-300"
+  >
+    <a
+      href={`${base}${slug}`}
+      class="flex min-h-[44px] items-center justify-center sm:justify-start"
+    >
+      <span class="absolute -inset-x-4 -inset-y-2.5 sm:-inset-x-6 sm:-inset-y-4"></span>
+      {title}
+    </a>
+  </h3>
+
+  {
+    description && (
+      <p class="theme-transition-color relative z-10 mt-2 line-clamp-3 w-full text-center text-sm text-zinc-600 sm:mt-3 sm:text-left dark:text-zinc-400">
+        {description}
+      </p>
+    )
+  }
+
+  {
+    tags.length > 0 && (
+      <div class="relative z-10 mt-3 flex w-full flex-wrap justify-center gap-2 sm:mt-4 sm:justify-start">
+        {tags.slice(0, 3).map((tag) => (
+          <a
+            href={`${base}tags/${tag}`}
+            class="theme-transition-all inline-flex min-h-6 items-center rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-800 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700"
+          >
+            #{tag}
+          </a>
+        ))}
+        {tags.length > 3 && (
+          <span class="theme-transition-all inline-flex min-h-6 items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-500 dark:bg-zinc-800/50 dark:text-zinc-400">
+            +{tags.length - 3} more
+          </span>
+        )}
+      </div>
+    )
+  }
+
+  <a
+    href={`${base}${slug}`}
+    class="theme-transition-color relative z-10 mx-auto mt-3 flex min-h-[44px] items-center text-sm font-medium text-zinc-700 transition-colors group-hover:text-zinc-900 sm:mx-0 sm:mt-4 dark:text-zinc-300 dark:group-hover:text-zinc-100"
+  >
+    <span class="relative inline-block overflow-hidden pr-2">
+      <span class="block transition-transform duration-300 group-hover:-translate-y-full">
+        Read article
+      </span>
+      <span
+        class="absolute top-0 left-0 translate-y-full whitespace-nowrap transition-transform duration-300 group-hover:translate-y-0"
+      >
+        Explore now
+      </span>
+    </span>
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      class="ml-0 h-4 w-4 stroke-current transition-transform duration-300 group-hover:translate-x-1"
+    >
+      <path
+        d="M6.75 5.75 9.25 8l-2.5 2.25"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</article>
