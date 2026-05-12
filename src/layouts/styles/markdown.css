@@ -109,16 +109,7 @@ article .heading-visible {
 
 /* Links */
 .markdown-content a {
-  @apply border-b border-transparent no-underline;
-  color: var(--color-link);
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.markdown-content a:hover {
-  color: var(--color-link-hover);
-  border-bottom-color: var(--color-link-hover);
+  @apply underline;
 }
 
 /* Bold */

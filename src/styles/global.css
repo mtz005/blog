@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../**/*.astro";
 
 /* Replaces darkMode: 'class' from tailwind.config.cjs */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -28,10 +29,6 @@
     --color-text-subtle: 161 161 170; /* zinc-400 */
     --color-primary: 24 24 27; /* zinc-900 — main accent / underlines */
     --color-primary-fg: 255 255 255; /* white    — text on primary bg       */
-
-    /* ─── Link colours ───────────────────────────────────────────── */
-    --color-link: #cf976b;
-    --color-link-hover: #c47b44;
 
     /* ─── Code block colours (always dark-surface) ───────────────── */
     --color-code-block-bg: var(--color-slate-800);
@@ -84,10 +81,6 @@
     --color-text-subtle: 113 113 122; /* zinc-500 */
     --color-primary: 244 244 245; /* zinc-100 */
     --color-primary-fg: 24 24 27; /* zinc-900 */
-
-    /* ─── Link colours (dark) ────────────────────────────────────── */
-    /* --color-link: var(--color-blue-500);
-    --color-link-hover: var(--color-blue-400); */
 
     /* ─── Blockquote border (dark) ───────────────────────────────── */
     --color-blockquote-border: var(--color-blue-400);
