@@ -201,10 +201,9 @@ const socialLinks = [
                 >
                   <div
                     id="progress-bar"
-                    class="flex flex-col justify-center rounded-full bg-gradient-to-r from-[#1DB954] to-[#1ed760] shadow-none transition-all duration-300 ease-out"
+                    class="flex flex-col justify-center rounded-full bg-[#1DB954] transition-all duration-300 ease-out"
                     style="width: 62%"
                   >
-                    <div class="progress-glow absolute inset-0 bg-[#1DB954]/20 blur-sm"></div>
                   </div>
                 </div>
               </div>
@@ -659,21 +658,6 @@ const socialLinks = [
     }
   }
 
-  /* Progress bar glow effect */
-  .progress-glow {
-    animation: glow 2s ease-in-out infinite;
-  }
-
-  @keyframes glow {
-    0%,
-    100% {
-      opacity: 0.5;
-    }
-    50% {
-      opacity: 0.8;
-    }
-  }
-
   /* Simplified hover effects for Spotify player */
   #spotify-now-playing {
     position: relative;
@@ -684,21 +668,6 @@ const socialLinks = [
 
   #spotify-now-playing:hover {
     transform: translateY(-4px);
-  }
-
-  #spotify-now-playing::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.03), transparent);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: inherit;
-    pointer-events: none;
-  }
-
-  #spotify-now-playing:hover::before {
-    opacity: 1;
   }
 
   /* Simplified pulse animation */
@@ -746,33 +715,10 @@ const socialLinks = [
     overflow: hidden;
   }
 
-  #spotify-now-playing::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(
-      circle at center,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0) 70%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  #spotify-now-playing:hover::before {
-    opacity: 1;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .animate-pulse,
     .animate-float-slow,
     .pulse-dot::after,
-    .progress-glow,
     .spinner,
     .marquee-active .marquee-wrapper {
       animation: none;

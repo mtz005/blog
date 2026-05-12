@@ -13,58 +13,56 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    
-
     /* ─── Theme transition ───────────────────────────────────────── */
     --theme-transition-duration: 0.4s;
     --theme-transition-timing: ease;
     --theme-transition: var(--theme-transition-duration) var(--theme-transition-timing);
 
     /* ─── Semantic colour tokens — light mode ────────────────────── */
-    --color-bg:          255 255 255;   /* white   */
-    --color-bg-surface:  244 244 245;   /* zinc-100 */
-    --color-bg-elevated: 250 250 250;   /* zinc-50  */
-    --color-border:      228 228 231;   /* zinc-200 */
-    --color-text:         24  24  27;   /* zinc-900 */
-    --color-text-muted:  113 113 122;   /* zinc-500 */
-    --color-text-subtle: 161 161 170;   /* zinc-400 */
-    --color-primary:      24  24  27;   /* zinc-900 — main accent / underlines */
-    --color-primary-fg:  255 255 255;   /* white    — text on primary bg       */
+    --color-bg: 255 255 255; /* white   */
+    --color-bg-surface: 244 244 245; /* zinc-100 */
+    --color-bg-elevated: 250 250 250; /* zinc-50  */
+    --color-border: 228 228 231; /* zinc-200 */
+    --color-text: 24 24 27; /* zinc-900 */
+    --color-text-muted: 113 113 122; /* zinc-500 */
+    --color-text-subtle: 161 161 170; /* zinc-400 */
+    --color-primary: 24 24 27; /* zinc-900 — main accent / underlines */
+    --color-primary-fg: 255 255 255; /* white    — text on primary bg       */
 
     /* ─── Link colours ───────────────────────────────────────────── */
-    --color-link:              var(--color-blue-600);
-    --color-link-hover:        var(--color-blue-700);
+    --color-link: #cf976b;
+    --color-link-hover: #c47b44;
 
     /* ─── Code block colours (always dark-surface) ───────────────── */
-    --color-code-block-bg:     var(--color-slate-800);
-    --color-code-text:         var(--color-gray-200);
-    --color-code-border:       var(--color-gray-600);
+    --color-code-block-bg: var(--color-slate-800);
+    --color-code-text: var(--color-gray-200);
+    --color-code-border: var(--color-gray-600);
 
     /* ─── Inline code colours ────────────────────────────────────── */
-    --color-inline-code:       var(--color-red-500);
+    --color-inline-code: var(--color-red-500);
 
     /* ─── Blockquote / prose accents ─────────────────────────────── */
     --color-blockquote-border: var(--color-blue-500);
-    --color-strong:            var(--color-teal-500);
+    --color-strong: var(--color-teal-500);
 
     /* ─── Syntax token colours ───────────────────────────────────── */
-    --color-token-comment:     var(--color-gray-500);
-    --color-token-property:    var(--color-red-500);
-    --color-token-string:      var(--color-emerald-500);
-    --color-token-operator:    var(--color-purple-600);
-    --color-token-keyword:     var(--color-blue-500);
-    --color-token-function:    var(--color-amber-500);
-    --color-token-regex:       var(--color-pink-500);
+    --color-token-comment: var(--color-gray-500);
+    --color-token-property: var(--color-red-500);
+    --color-token-string: var(--color-emerald-500);
+    --color-token-operator: var(--color-purple-600);
+    --color-token-keyword: var(--color-blue-500);
+    --color-token-function: var(--color-amber-500);
+    --color-token-regex: var(--color-pink-500);
 
     /* ─── Callout accent colours ─────────────────────────────────── */
-    --color-callout-info:      var(--color-blue-500);
-    --color-callout-warning:   var(--color-amber-500);
-    --color-callout-danger:    var(--color-red-500);
-    --color-callout-tip:       var(--color-emerald-500);
+    --color-callout-info: var(--color-blue-500);
+    --color-callout-warning: var(--color-amber-500);
+    --color-callout-danger: var(--color-red-500);
+    --color-callout-tip: var(--color-emerald-500);
 
     /* ─── Highlight / mark ───────────────────────────────────────── */
-    --color-mark-bg:           var(--color-amber-100);
-    --color-mark-text:         var(--color-amber-800);
+    --color-mark-bg: var(--color-amber-100);
+    --color-mark-text: var(--color-amber-800);
 
     /* Typography plugin theme overrides (replaces theme.extend.typography) */
     --tw-prose-links: var(--color-zinc-900);
@@ -77,28 +75,28 @@
 
   /* ─── Dark-mode overrides ──────────────────────────────────────── */
   :root.dark {
-    --color-bg:          24  24  27;   /* zinc-900 */
-    --color-bg-surface:  39  39  42;   /* zinc-800 */
-    --color-bg-elevated: 63  63  70;   /* zinc-700 */
-    --color-border:      63  63  70;   /* zinc-700 */
-    --color-text:        244 244 245;  /* zinc-100 */
-    --color-text-muted:  161 161 170;  /* zinc-400 */
-    --color-text-subtle: 113 113 122;  /* zinc-500 */
-    --color-primary:     244 244 245;  /* zinc-100 */
-    --color-primary-fg:   24  24  27;  /* zinc-900 */
+    --color-bg: 24 24 27; /* zinc-900 */
+    --color-bg-surface: 39 39 42; /* zinc-800 */
+    --color-bg-elevated: 63 63 70; /* zinc-700 */
+    --color-border: 63 63 70; /* zinc-700 */
+    --color-text: 244 244 245; /* zinc-100 */
+    --color-text-muted: 161 161 170; /* zinc-400 */
+    --color-text-subtle: 113 113 122; /* zinc-500 */
+    --color-primary: 244 244 245; /* zinc-100 */
+    --color-primary-fg: 24 24 27; /* zinc-900 */
 
     /* ─── Link colours (dark) ────────────────────────────────────── */
-    --color-link:              var(--color-blue-500);
-    --color-link-hover:        var(--color-blue-400);
+    /* --color-link: var(--color-blue-500);
+    --color-link-hover: var(--color-blue-400); */
 
     /* ─── Blockquote border (dark) ───────────────────────────────── */
     --color-blockquote-border: var(--color-blue-400);
 
     /* ─── Inline code (dark) ─────────────────────────────────────── */
-    --color-inline-code:       var(--color-red-400);
+    --color-inline-code: var(--color-red-400);
 
     /* ─── Mark (dark) ────────────────────────────────────────────── */
-    --color-mark-text:         var(--color-amber-400);
+    --color-mark-text: var(--color-amber-400);
   }
 
   html {
@@ -201,7 +199,7 @@
 
 .theme-ripple::after {
   content: "";
-  @apply absolute inset-0 opacity-0 pointer-events-none;
+  @apply pointer-events-none absolute inset-0 opacity-0;
   background: rgb(var(--color-primary) / 0.06);
   border-radius: inherit;
   transition: opacity var(--theme-transition);
@@ -209,6 +207,17 @@
 
 .theme-ripple.ripple-active::after {
   @apply opacity-100;
+}
+
+/* ─── Extra-small breakpoint utilities (480 px) ───────────────────────────── */
+@media (min-width: 480px) {
+  .xs\:inline {
+    display: inline;
+  }
+
+  .xs\:hidden {
+    display: none;
+  }
 }
 
 /* ─── Minimal responsive styles ───────────────────────────────────────────── */
@@ -321,9 +330,9 @@ button {
 }
 
 .page-entering {
-  @apply opacity-0 translate-y-2.5;
+  @apply translate-y-2.5 opacity-0;
 }
 
 .page-entered {
-  @apply opacity-100 translate-y-0;
+  @apply translate-y-0 opacity-100;
 }

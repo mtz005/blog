@@ -48,22 +48,18 @@ const finalReadingTime = entry.data.readingTime || readingTimeValue;
 ---
 
 <BlogPost {...entry.data} readingTime={finalReadingTime}>
-  <!-- Main Content - Enhanced with better typography and spacing -->
-  <div
-    class="prose prose-zinc dark:prose-invert prose-headings:scroll-mt-24 prose-headings:font-semibold prose-a:text-zinc-800 dark:prose-a:text-zinc-300 prose-a:font-medium prose-a:underline-offset-4 hover:prose-a:text-zinc-600 dark:hover:prose-a:text-zinc-100 prose-img:rounded-md sm:prose-base prose-sm max-w-none"
-  >
-    <Content />
-  </div>
+  <Content />
 
   <!-- Next/Previous Navigation - Improved responsive design -->
   <div
+    slot="after-article"
     class="mt-12 grid grid-cols-1 gap-4 border-t border-zinc-200 pt-8 sm:mt-16 sm:gap-6 sm:pt-12 md:grid-cols-2 dark:border-zinc-800"
   >
     {
       prevPost && (
         <a
           href={`${base}${prevPost.slug}`}
-          class="group relative flex h-full flex-col rounded-md border! border-zinc-200! p-4 no-underline! transition-all duration-300 hover:bg-zinc-50 sm:p-6 dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+          class="group relative flex h-full flex-col rounded-md border border-zinc-200 p-4 no-underline! transition-colors duration-300 sm:p-6 dark:border-zinc-700"
         >
           <span class="relative z-10 mb-1 flex items-center gap-1 text-xs font-medium text-zinc-500 sm:mb-2 sm:gap-2 sm:text-sm dark:text-zinc-400">
             <svg
@@ -92,9 +88,8 @@ const finalReadingTime = entry.data.readingTime || readingTimeValue;
       nextPost && (
         <a
           href={`${base}${nextPost.slug}`}
-          class="group relative flex h-full flex-col overflow-hidden rounded-md border border-zinc-200 p-4 transition-all duration-300 hover:-translate-y-1 hover:bg-zinc-50 sm:p-6 md:text-right dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+          class="group relative flex h-full flex-col rounded-md border border-zinc-200 p-4 no-underline! transition-colors duration-300 sm:p-6 dark:border-zinc-700"
         >
-          <div class="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <span class="relative z-10 mb-1 flex items-center gap-1 text-xs font-medium text-zinc-500 sm:mb-2 sm:gap-2 sm:text-sm md:justify-end dark:text-zinc-400">
             Next Article
             <svg
@@ -254,102 +249,3 @@ const finalReadingTime = entry.data.readingTime || readingTimeValue;
   // For compatibility with custom transition system
   document.addEventListener("page-transition-complete", initializeBlogPost);
 </script>
-
-<style>
-  @reference "../styles/global.css";
-
-  /* Removing TOC-related styles */
-
-  /* Language badge styling */
-  .language-badge {
-    font-family:
-      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
-      monospace;
-    text-transform: lowercase;
-    letter-spacing: 0.05em;
-  }
-
-  /* Extra small screens */
-  @media (min-width: 480px) {
-    .xs\:inline {
-      display: inline;
-    }
-
-    .xs\:hidden {
-      display: none;
-    }
-  }
-
-  /* Enhanced typography for blog content - Responsive adjustments */
-  .prose {
-    @apply text-zinc-800 dark:text-zinc-200;
-  }
-
-  .prose h1,
-  .prose h2,
-  .prose h3,
-  .prose h4 {
-    @apply font-semibold text-zinc-900 dark:text-zinc-100;
-  }
-
-  .prose h1 {
-    @apply text-2xl sm:text-3xl md:text-4xl;
-  }
-
-  .prose h2 {
-    @apply mt-8 mb-3 border-b border-zinc-200 pb-2 text-xl sm:mt-12 sm:mb-4 sm:text-2xl dark:border-zinc-800;
-  }
-
-  .prose h3 {
-    @apply mt-6 mb-2 text-lg sm:mt-8 sm:mb-3 sm:text-xl;
-  }
-
-  .prose p {
-    @apply mb-4 text-sm leading-relaxed sm:mb-6 sm:text-base;
-  }
-
-  .prose a {
-    @apply font-medium text-zinc-800 underline decoration-zinc-400 underline-offset-2 transition-colors hover:text-zinc-600 hover:decoration-zinc-600 dark:text-zinc-300 dark:decoration-zinc-600 dark:hover:text-zinc-100 dark:hover:decoration-zinc-400;
-  }
-
-  .prose blockquote {
-    @apply my-4 border-l-4 border-zinc-300 pl-4 text-zinc-700 italic sm:my-6 dark:border-zinc-700 dark:text-zinc-300;
-  }
-
-  .prose code {
-    @apply rounded bg-zinc-100 px-1.5 py-0.5 text-sm font-medium text-zinc-800 dark:bg-zinc-800 dark:text-zinc-200;
-  }
-
-  .prose pre {
-    @apply !my-4 !overflow-x-auto !rounded-lg !bg-[#1e293b] !p-3 !text-xs !text-zinc-200 !shadow-md sm:!my-6 sm:!p-4 sm:!text-sm;
-  }
-
-  .prose pre code {
-    @apply !bg-transparent !p-0 !text-zinc-200 dark:!text-zinc-200;
-  }
-
-  .prose img {
-    @apply mx-auto my-6 h-auto max-w-full rounded-lg shadow-md sm:my-8;
-  }
-
-  .prose ul,
-  .prose ol {
-    @apply my-4 pl-5 sm:my-6 sm:pl-6;
-  }
-
-  .prose li {
-    @apply text-sm sm:mb-2 sm:text-base;
-  }
-
-  .prose hr {
-    @apply my-8 border-zinc-200 sm:my-10 dark:border-zinc-800;
-  }
-
-  /* Line clamp for truncating text */
-  .line-clamp-2 {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-</style>

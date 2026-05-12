@@ -10,8 +10,14 @@ article.article-entering {
 }
 
 @keyframes article-fade-in {
-  from { opacity: 0; transform: translateY(1.25rem); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Hero image hover effect */
@@ -55,6 +61,15 @@ article .heading-visible {
 }
 
 /* Headings */
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4,
+.markdown-content h5,
+.markdown-content h6 {
+  scroll-margin-top: 6rem;
+}
+
 .markdown-content h1 {
   @apply mt-10 mb-6 border-b pb-2 text-[2.5rem] leading-[1.2] font-extrabold;
   color: rgb(var(--color-text));
@@ -108,16 +123,7 @@ article .heading-visible {
 
 /* Bold */
 .markdown-content strong {
-  @apply font-bold;
-}
-
-.dark .markdown-content strong {
-  color: var(--color-strong);
-  background: linear-gradient(
-    to bottom,
-    transparent 60%,
-    color-mix(in oklch, var(--color-strong) 15%, transparent) 40%
-  );
+  @apply font-semibold;
 }
 
 /* Lists */
@@ -226,6 +232,11 @@ article .heading-visible {
 }
 
 /* Inline code */
+.markdown-content code::before,
+.markdown-content code::after {
+  content: "";
+}
+
 .markdown-content code:not(pre code) {
   @apply rounded px-[0.4em] py-[0.2em] font-mono text-[0.875em] whitespace-nowrap;
   color: var(--color-inline-code);
@@ -234,7 +245,8 @@ article .heading-visible {
 
 /* Tables */
 .markdown-content .table-container {
-  @apply my-6 overflow-x-auto rounded-lg shadow-md;
+  @apply overflow-x-auto rounded-md border;
+  border-color: rgb(var(--color-border));
 }
 
 .markdown-content table {
@@ -242,7 +254,7 @@ article .heading-visible {
 }
 
 .markdown-content table th {
-  @apply border-b-2 px-4 py-3 font-semibold;
+  @apply border-b px-4 py-3 font-semibold;
   background-color: rgb(var(--color-bg-surface));
   color: rgb(var(--color-text));
   border-color: rgb(var(--color-border));
@@ -563,4 +575,23 @@ article .heading-visible {
 
 .markdown-content iframe {
   @apply my-6 max-w-full rounded-lg shadow-md;
+}
+
+/* ─── Blog post UI utilities ────────────────────────────────────────────────── */
+
+/* Language badge on code blocks */
+.language-badge {
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Truncate post titles in prev/next navigation */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
