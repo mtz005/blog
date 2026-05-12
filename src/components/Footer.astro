@@ -17,7 +17,7 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
 ---
 
 <footer
-  class="theme-transition-all relative mt-20 overflow-hidden border-t border-zinc-100 dark:border-zinc-800"
+  class="theme-transition-all relative mt-8 overflow-hidden border-t border-zinc-100 dark:border-zinc-800"
   style="content-visibility: auto; contain-intrinsic-size: auto 400px;"
 >
   <!-- Enhanced decorative elements with animation -->
@@ -36,7 +36,7 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
     </div>
   </div>
 
-  <div class="relative px-4 pt-16 pb-12 sm:px-6">
+  <div class="relative px-4 pt-8 pb-8 sm:px-6">
     <div class="mx-auto max-w-4xl">
       <!-- Main footer content with improved grid layout -->
       <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
@@ -65,7 +65,7 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
                   href={social.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="group relative flex h-10 w-10 transform items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-all duration-300 hover:text-zinc-900 hover:ring-2 hover:ring-zinc-300 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:ring-zinc-700"
+                  class="group relative flex size-11 transform items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-all duration-300 hover:text-zinc-900 hover:ring-2 hover:ring-zinc-300 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:ring-zinc-700"
                   aria-label={social.name}
                 >
                   <span class="absolute inset-0 rounded-full bg-gradient-to-br from-zinc-200 to-zinc-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-zinc-700 dark:to-zinc-600" />
@@ -130,7 +130,7 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
                 id="track-artwork"
               >
                 <img
-                  src="https://i.scdn.co/image/ab67616d0000b273c5716278a9e4964150cc0eb9"
+                  src="/track-placeholder.png"
                   alt="Album artwork"
                   class="h-full w-full object-cover transition-all duration-700 hover:scale-110"
                   id="track-image"
@@ -400,7 +400,7 @@ const socialLinks = SOCIAL_LINKS.filter((s) => s.name !== "Facebook");
       // Handle case when elements or data are missing
       if (trackNameEl) trackNameEl.textContent = "Not playing";
       if (trackArtistEl) trackArtistEl.textContent = "Spotify";
-      if (trackImageEl) trackImageEl.src = "/placeholder.svg?height=56&width=56";
+      if (trackImageEl) trackImageEl.src = "/track-placeholder.png";
       if (spotifyLinkEl) spotifyLinkEl.href = "https://open.spotify.com";
       if (progressBarEl) progressBarEl.style.width = "0%";
       if (currentTimeEl) currentTimeEl.textContent = "0:00";
