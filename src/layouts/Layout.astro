@@ -119,6 +119,10 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
             if (mainContent && newContent) {
               mainContent.innerHTML = newContent.innerHTML;
 
+              // Scripts injected via innerHTML are parsed as DOM nodes but never executed.
+              // Remove them so the querySelector check below only matches truly-executed scripts.
+              Array.from(mainContent.querySelectorAll("script")).forEach((s) => s.remove());
+
               // Run scripts in the new content
               Array.from(newContent.querySelectorAll("script")).forEach((oldScript) => {
                 const src = oldScript.getAttribute("src");
@@ -164,8 +168,56 @@ const { title, description = "A minimalist personal blog" } = Astro.props;
 
             // Re-initialize Cusdis if the new page has a comment thread
             const cusdisThread = document.getElementById("cusdis_thread");
-            if (cusdisThread && (window as any).CUSDIS) {
-              (window as any).CUSDIS.renderTo(cusdisThread);
+            if (cusdisThread) {
+              const attachHeightObserver = (iframe: HTMLIFrameElement) => {
+                const tryObserve = () => {
+                  try {
+                    const body = (iframe.contentDocument as Document)?.body;
+                    if (!body) { setTimeout(tryObserve, 100); return; }
+                    new ResizeObserver(() => {
+                      const h = (iframe.contentDocument as Document).body.scrollHeight;
+                      if (h > 0) iframe.style.height = h + "px";
+                    }).observe(body);
+                  } catch { setTimeout(tryObserve, 200); }
+                };
+                iframe.addEventListener("load", tryObserve);
+                tryObserve();
+              };
+
+              const waitForIframe = () => {
+                const existing = cusdisThread.querySelector("iframe") as HTMLIFrameElement | null;
+                if (existing) {
+                  attachHeightObserver(existing);
+                  return;
+                }
+                const mo = new MutationObserver((mutations) => {
+                  for (const m of mutations) {
+                    for (const node of m.addedNodes) {
+                      if ((node as Element).tagName === "IFRAME") {
+                        attachHeightObserver(node as HTMLIFrameElement);
+                        mo.disconnect();
+                        return;
+                      }
+                    }
+                  }
+                });
+                mo.observe(cusdisThread, { childList: true });
+              };
+
+              // Set up height observer BEFORE renderTo so the MutationObserver is ready
+              waitForIframe();
+
+              if ((window as any).CUSDIS) {
+                (window as any).CUSDIS.renderTo(cusdisThread);
+              } else {
+                // Script was just dynamically injected — wait for it to load then render
+                const cusdisScript = mainContent.querySelector('script[src*="cusdis.es.js"]') as HTMLScriptElement | null;
+                if (cusdisScript) {
+                  cusdisScript.addEventListener('load', () => {
+                    (window as any).CUSDIS?.renderTo(cusdisThread);
+                  }, { once: true });
+                }
+              }
             }
 
             // Dispatch custom event for content loaded
