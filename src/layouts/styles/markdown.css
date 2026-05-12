@@ -45,12 +45,12 @@ article .heading-visible {
     box-shadow 0.3s ease;
 }
 
-.blog-nav-link.nav-link-hover {
+.blog-nav-link:hover {
   @apply -translate-y-0.5;
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.1);
 }
 
-:global(.dark) .blog-nav-link.nav-link-hover {
+:global(.dark) .blog-nav-link:hover {
   box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.3);
 }
 
@@ -238,13 +238,9 @@ article .heading-visible {
 }
 
 /* Tables */
-.markdown-content .table-container {
-  @apply overflow-x-auto rounded-md border;
-  border-color: rgb(var(--color-border));
-}
-
 .markdown-content table {
-  @apply w-full border-collapse text-left text-sm;
+  @apply w-full border-collapse text-left text-sm overflow-x-auto rounded-md border;
+  border-color: rgb(var(--color-border));
 }
 
 .markdown-content table th {
@@ -259,19 +255,19 @@ article .heading-visible {
   border-color: rgb(var(--color-border));
 }
 
-.markdown-content table tr.even-row {
+.markdown-content table tbody tr:nth-child(even) {
   background-color: rgb(var(--color-bg-elevated));
 }
 
-.dark .markdown-content table tr.even-row {
+.dark .markdown-content table tbody tr:nth-child(even) {
   background-color: rgb(var(--color-bg));
 }
 
-.markdown-content table tr.odd-row {
+.markdown-content table tbody tr:nth-child(odd) {
   background-color: rgb(var(--color-bg));
 }
 
-.dark .markdown-content table tr.odd-row {
+.dark .markdown-content table tbody tr:nth-child(odd) {
   background-color: rgb(var(--color-bg-surface));
 }
 

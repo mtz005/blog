@@ -3,7 +3,6 @@ import Layout from "./Layout.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import ShareButtons from "../components/ShareButtons.astro";
 import TagList from "../components/TagList.astro";
-import "./styles/markdown.css";
 export interface Props {
   title: string;
   description: string;
@@ -68,7 +67,7 @@ if (heroImage) {
 
 <Layout title={title} description={description}>
   <article class="mx-auto max-w-4xl">
-    <div class="mb-12">
+    <div class="mb-8">
       <h1
         class="mb-4 text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl dark:text-zinc-100"
       >
@@ -92,7 +91,7 @@ if (heroImage) {
     <!-- Hero image with improved styling -->
     {
       heroImage && (
-        <div class="relative mb-8 overflow-hidden rounded-md shadow-lg sm:mb-12">
+        <div class="relative mb-8 overflow-hidden rounded-md shadow-lg sm:mb-8">
           <div class="aspect-[16/9] w-full">
             <img
               src={heroImageUrl}
@@ -394,69 +393,6 @@ if (heroImage) {
       }, 1000);
     }
 
-    // Ensure consistent code block styling
-    function updateCodeBlockStyles() {
-      document.querySelectorAll("pre").forEach((pre) => {
-        // Force the background color with !important for both light and dark mode
-        pre.setAttribute("style", "background-color: #1e293b !important");
-
-        // Also apply to any nested code elements
-        const codeElements = pre.querySelectorAll("code");
-        codeElements.forEach((code) => {
-          code.setAttribute(
-            "style",
-            "background-color: transparent !important; color: #e5e7eb !important;",
-          );
-        });
-      });
-    }
-
-    // Initial application
-    updateCodeBlockStyles();
-
-    // Watch for theme changes
-    const observer = new MutationObserver(() => {
-      updateCodeBlockStyles();
-    });
-
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-
-    // Also run on any content changes that might add new code blocks
-    const contentObserver = new MutationObserver((mutations) => {
-      for (const mutation of mutations) {
-        if (mutation.addedNodes.length) {
-          updateCodeBlockStyles();
-          break;
-        }
-      }
-    });
-
-    contentObserver.observe(document.body, { childList: true, subtree: true });
-
-    // Clean up observers when navigating away
-    document.addEventListener("spa-navigation-start", () => {
-      observer.disconnect();
-      contentObserver.disconnect();
-    });
-
-    // Remove the parallax effect for hero image
-
-    // Handle prev/next navigation links
-    const navLinks = document.querySelectorAll(".blog-nav-link");
-    navLinks.forEach((link) => {
-      if (!link.hasAttribute("data-spa-handled")) {
-        link.setAttribute("data-spa-handled", "true");
-
-        link.addEventListener("mouseenter", () => {
-          link.classList.add("nav-link-hover");
-        });
-
-        link.addEventListener("mouseleave", () => {
-          link.classList.remove("nav-link-hover");
-        });
-      }
-    });
-
     // Animate headings when they enter the viewport
     const animateHeadings = () => {
       const headings = document.querySelectorAll("article h2, article h3");
@@ -567,46 +503,8 @@ if (heroImage) {
           const languageBadge = document.createElement("div");
           languageBadge.className = "language-badge";
           languageBadge.textContent = `\`\`\`${language}`;
-          languageBadge.style.position = "absolute";
-          languageBadge.style.bottom = "0.5rem";
-          languageBadge.style.right = "0.5rem";
-          languageBadge.style.fontSize = "0.7rem";
-          languageBadge.style.padding = "0.1rem 0.3rem";
-          languageBadge.style.backgroundColor = "rgba(75, 85, 99, 0.7)";
-          languageBadge.style.color = "#e5e7eb";
-          languageBadge.style.borderRadius = "0.25rem";
-          languageBadge.style.fontFamily =
-            'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace';
-          languageBadge.style.zIndex = "10";
           codeBlock.parentElement.appendChild(languageBadge);
         }
-      });
-    }
-
-    // Enhance tables with better styling
-    function enhanceTables() {
-      const tables = document.querySelectorAll(".markdown-content table");
-
-      tables.forEach((table) => {
-        if (table.classList.contains("enhanced-table")) return;
-
-        table.classList.add("enhanced-table");
-
-        // Wrap table in responsive container
-        const wrapper = document.createElement("div");
-        wrapper.className = "table-container";
-        table.parentNode.insertBefore(wrapper, table);
-        wrapper.appendChild(table);
-
-        // Add zebra striping to rows
-        const rows = table.querySelectorAll("tbody tr");
-        rows.forEach((row, index) => {
-          if (index % 2 === 0) {
-            row.classList.add("even-row");
-          } else {
-            row.classList.add("odd-row");
-          }
-        });
       });
     }
 
@@ -634,7 +532,6 @@ if (heroImage) {
 
     // Run all enhancements
     enhanceCodeBlocks();
-    enhanceTables();
     enhanceBlockquotes();
 
     // Clean up observers when navigating away
