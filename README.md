@@ -1,4 +1,4 @@
-# mirkea.com — personal blog
+# mirkea.com - personal blog
 
 My corner of the internet where I document building a product from scratch, lessons learned after 20 years in software, and whatever else earns a post.
 

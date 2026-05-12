@@ -1,6 +1,6 @@
 ---
 title: A new journey
-description: I left Code11 after 20 years to build something of my own — here are the teasers, the confidence levels, and the plan to do it in public.
+description: I left Code11 after 20 years to build something of my own - here are the teasers, the confidence levels, and the plan to do it in public.
 pubDate: 2026-05-12
 readingTime: 2 min read
 tags:
