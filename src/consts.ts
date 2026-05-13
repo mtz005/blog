@@ -1,8 +1,8 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = "My Astro Blog";
-export const SITE_DESCRIPTION = "Welcome to my blog built with Astro";
+export const SITE_TITLE = "Mirkea's Blog";
+export const SITE_DESCRIPTION = "PM by trade. Builder by choice.";
 
 export interface SocialLink {
   name: string;
