@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 // Determine site URL based on environment
 const getSiteURL = () => {
@@ -24,7 +25,7 @@ const getSiteURL = () => {
 export default defineConfig({
 	site: getSiteURL(),
 	base: "/",
-	integrations: [react()],
+	integrations: [react(), sitemap()],
 	vite: {
 		plugins: [tailwindcss()],
 	},
